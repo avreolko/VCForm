@@ -13,7 +13,7 @@ import VCExtensions
 public class VCStackForm: UIView {
 
 	private var scrollView = UIScrollView(frame: .zero)
-	private var stackView = UIStackView(frame: .zero)
+	public var stackView = UIStackView(frame: .zero)
 	private var formBuilder = StackViewFormBuilder()
 
 	public override init(frame: CGRect) {
@@ -64,15 +64,13 @@ private extension VCStackForm {
 		stackView.setConstraint(leading: 0, to: contentView)
 		stackView.setConstraint(trailing: 0, to: contentView)
 		stackView.setConstraint(top: 0, to: contentView)
-		stackView.setConstraint(height: 100, priority: .defaultLow)
+		stackView.setConstraint(height: 200, priority: .defaultHigh)
 	}
 
 	func configure() {
 		self.stackView.axis = .vertical
 		self.stackView.alignment = .fill
 		self.stackView.distribution = .fillProportionally
-		self.stackView.setContentHuggingPriority(.required, for: .vertical)
-		self.stackView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
 	}
 
 	func updateContentSize() {

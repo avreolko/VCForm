@@ -9,29 +9,32 @@
 import UIKit
 import VCFormBuilder
 
-internal class StackViewFormBuilder: IFormBuilder {
+public class StackViewFormBuilder: IFormBuilder {
 
-	typealias ContainerView = UIStackView
+	public typealias ContainerView = UIStackView
 
 	private let buildersRegistrar = BuildersRegistrar()
 	private var models: [FormElementModel] = []
 
+	public init() { }
+
 	@discardableResult
-	func append(_ model: FormElementModel) -> Self {
+	public func append(_ model: FormElementModel) -> Self {
 		self.models.append(model)
 		return self
 	}
 
 	@discardableResult
-	func build(in stackView: ContainerView) -> Self {
+	public func build(in stackView: ContainerView) -> Self {
 		
 		stackView.subviews.forEach { $0.removeFromSuperview() }
 
 		self.models.forEach { (model) in
 			if let builder = self.buildersRegistrar.builder(for: model.type.rawValue) {
 				let view = builder.buildView(with: model.data)
-				view.sizeToFit()
+				view.setContentHuggingPriority(.required, for: .vertical)
 				stackView.addArrangedSubview(view)
+				view.sizeToFit()
 			}
 		}
 
@@ -39,7 +42,7 @@ internal class StackViewFormBuilder: IFormBuilder {
 	}
 
 	@discardableResult
-	func reset() -> Self {
+	public func reset() -> Self {
 		self.models.removeAll()
 		return self
 	}
@@ -47,7 +50,7 @@ internal class StackViewFormBuilder: IFormBuilder {
 
 extension StackViewFormBuilder: IBuildersRegistrar {
 	
-	func register(_ builder: IFormViewBuilder, for id: String) {
+	public func register(_ builder: IFormViewBuilder, for id: String) {
 		self.buildersRegistrar.register(builder, for: id)
 	}
 }
