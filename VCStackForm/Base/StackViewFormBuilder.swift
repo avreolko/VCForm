@@ -6,7 +6,6 @@
 //  Copyright © 2018 Valentin Cherepyanko. All rights reserved.
 //
 
-import UIKit
 import VCFormBuilder
 
 public class StackViewFormBuilder: IFormBuilder {
