@@ -9,22 +9,18 @@
 import UIKit
 import VCFormBuilder
 
-public protocol IBuildersRegistrar {
-	func register(_ builder: IFormViewBuilder, for id: String)
-}
-
 public class BuildersRegistrar: IBuildersRegistrar {
 
 	private var customBuilders: [String: IFormViewBuilder] = [:]
 
 	public init() { }
 
-	public func builder(for typeID: String) -> IFormViewBuilder? {
-		return defaultBuilder(for: typeID) ?? customBuilder(for: typeID)
+	public func builder(for type: IBuilderType) -> IFormViewBuilder? {
+		return defaultBuilder(for: type.stringID) ?? customBuilder(for: type.stringID)
 	}
 
-	public func register(_ builder: IFormViewBuilder, for id: String) {
-		self.customBuilders[id] = builder
+	public func register(_ builder: IFormViewBuilder, for type: IBuilderType) {
+		self.customBuilders[type.stringID] = builder
 	}
 }
 
@@ -37,6 +33,7 @@ private extension BuildersRegistrar {
 		case FormElementType.button.rawValue: return ButtonBuilder()
 		case FormElementType.field.rawValue: return TextFieldBuilder()
 		case FormElementType.padding.rawValue: return PaddingBuilder()
+		case FormElementType.title.rawValue: return TitleBuilder()
 		default: return nil
 		}
 	}
