@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A79FB63821DC71630056795D /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79FB63621DC71630056795D /* ActionButton.swift */; };
+		A79FB63921DC71630056795D /* ActionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79FB63721DC71630056795D /* ActionTextField.swift */; };
+		A79FB64021DC71690056795D /* TextFieldBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79FB63B21DC71680056795D /* TextFieldBuilder.swift */; };
+		A79FB64121DC71690056795D /* ButtonBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79FB63C21DC71680056795D /* ButtonBuilder.swift */; };
+		A79FB64221DC71690056795D /* ImageViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79FB63D21DC71680056795D /* ImageViewBuilder.swift */; };
+		A79FB64321DC71690056795D /* LabelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79FB63E21DC71680056795D /* LabelBuilder.swift */; };
+		A79FB64421DC71690056795D /* PaddingBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79FB63F21DC71680056795D /* PaddingBuilder.swift */; };
+		A79FB64621DC716E0056795D /* BuildersRegistrar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79FB64521DC716D0056795D /* BuildersRegistrar.swift */; };
+		A79FB64E21DDDAA00056795D /* FormElementType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79FB64D21DDDAA00056795D /* FormElementType.swift */; };
+		A79FB64F21DDE0260056795D /* TitleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79FB64B21DC77E30056795D /* TitleBuilder.swift */; };
 		A7D0B64421D9CC9600F8BD5B /* VCStackForm.h in Headers */ = {isa = PBXBuildFile; fileRef = A7D0B64221D9CC9600F8BD5B /* VCStackForm.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7D0B64B21D9CCA200F8BD5B /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = A7D0B64A21D9CCA200F8BD5B /* Cartfile */; };
 		A7D0B64F21D9CD2400F8BD5B /* VCExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D0B64D21D9CD2400F8BD5B /* VCExtensions.framework */; };
@@ -24,7 +34,6 @@
 		A7D0B67321D9D40F00F8BD5B /* VCExtensions.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A7D0B64D21D9CD2400F8BD5B /* VCExtensions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A7D0B67421D9D40F00F8BD5B /* VCFormBuilder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D0B64E21D9CD2400F8BD5B /* VCFormBuilder.framework */; };
 		A7D0B67521D9D40F00F8BD5B /* VCFormBuilder.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A7D0B64E21D9CD2400F8BD5B /* VCFormBuilder.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		A7D0B69721D9EB2200F8BD5B /* AnotherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7D0B69621D9EB2200F8BD5B /* AnotherViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +63,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A79FB63621DC71630056795D /* ActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
+		A79FB63721DC71630056795D /* ActionTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionTextField.swift; sourceTree = "<group>"; };
+		A79FB63B21DC71680056795D /* TextFieldBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldBuilder.swift; sourceTree = "<group>"; };
+		A79FB63C21DC71680056795D /* ButtonBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonBuilder.swift; sourceTree = "<group>"; };
+		A79FB63D21DC71680056795D /* ImageViewBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewBuilder.swift; sourceTree = "<group>"; };
+		A79FB63E21DC71680056795D /* LabelBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelBuilder.swift; sourceTree = "<group>"; };
+		A79FB63F21DC71680056795D /* PaddingBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddingBuilder.swift; sourceTree = "<group>"; };
+		A79FB64521DC716D0056795D /* BuildersRegistrar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildersRegistrar.swift; sourceTree = "<group>"; };
+		A79FB64B21DC77E30056795D /* TitleBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleBuilder.swift; sourceTree = "<group>"; };
+		A79FB64D21DDDAA00056795D /* FormElementType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormElementType.swift; sourceTree = "<group>"; };
 		A7D0B63F21D9CC9600F8BD5B /* VCStackForm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VCStackForm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7D0B64221D9CC9600F8BD5B /* VCStackForm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VCStackForm.h; sourceTree = "<group>"; };
 		A7D0B64321D9CC9600F8BD5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -69,7 +88,6 @@
 		A7D0B66421D9D29600F8BD5B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A7D0B66721D9D29600F8BD5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A7D0B66921D9D29600F8BD5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A7D0B69621D9EB2200F8BD5B /* AnotherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnotherViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +113,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A79FB63521DC71630056795D /* Custom views */ = {
+			isa = PBXGroup;
+			children = (
+				A79FB63621DC71630056795D /* ActionButton.swift */,
+				A79FB63721DC71630056795D /* ActionTextField.swift */,
+			);
+			path = "Custom views";
+			sourceTree = "<group>";
+		};
+		A79FB63A21DC71680056795D /* Default builders */ = {
+			isa = PBXGroup;
+			children = (
+				A79FB63B21DC71680056795D /* TextFieldBuilder.swift */,
+				A79FB63C21DC71680056795D /* ButtonBuilder.swift */,
+				A79FB63D21DC71680056795D /* ImageViewBuilder.swift */,
+				A79FB63E21DC71680056795D /* LabelBuilder.swift */,
+				A79FB63F21DC71680056795D /* PaddingBuilder.swift */,
+				A79FB64B21DC77E30056795D /* TitleBuilder.swift */,
+			);
+			path = "Default builders";
+			sourceTree = "<group>";
+		};
 		A7D0B63521D9CC9600F8BD5B = {
 			isa = PBXGroup;
 			children = (
@@ -119,6 +159,8 @@
 			isa = PBXGroup;
 			children = (
 				A7D0B65221D9CDBA00F8BD5B /* Base */,
+				A79FB63A21DC71680056795D /* Default builders */,
+				A79FB63521DC71630056795D /* Custom views */,
 				A7D0B64221D9CC9600F8BD5B /* VCStackForm.h */,
 				A7D0B64321D9CC9600F8BD5B /* Info.plist */,
 			);
@@ -139,6 +181,8 @@
 			children = (
 				A7D0B65321D9CDC400F8BD5B /* StackViewFormBuilder.swift */,
 				A7D0B65421D9CDC400F8BD5B /* VCStackForm.swift */,
+				A79FB64521DC716D0056795D /* BuildersRegistrar.swift */,
+				A79FB64D21DDDAA00056795D /* FormElementType.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -152,7 +196,6 @@
 				A7D0B66421D9D29600F8BD5B /* Assets.xcassets */,
 				A7D0B66621D9D29600F8BD5B /* LaunchScreen.storyboard */,
 				A7D0B66921D9D29600F8BD5B /* Info.plist */,
-				A7D0B69621D9EB2200F8BD5B /* AnotherViewController.swift */,
 			);
 			path = VCStackFormExample;
 			sourceTree = "<group>";
@@ -295,8 +338,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A79FB64E21DDDAA00056795D /* FormElementType.swift in Sources */,
 				A7D0B65521D9CDC400F8BD5B /* StackViewFormBuilder.swift in Sources */,
+				A79FB64121DC71690056795D /* ButtonBuilder.swift in Sources */,
 				A7D0B65621D9CDC400F8BD5B /* VCStackForm.swift in Sources */,
+				A79FB63821DC71630056795D /* ActionButton.swift in Sources */,
+				A79FB64421DC71690056795D /* PaddingBuilder.swift in Sources */,
+				A79FB64321DC71690056795D /* LabelBuilder.swift in Sources */,
+				A79FB64021DC71690056795D /* TextFieldBuilder.swift in Sources */,
+				A79FB64221DC71690056795D /* ImageViewBuilder.swift in Sources */,
+				A79FB63921DC71630056795D /* ActionTextField.swift in Sources */,
+				A79FB64F21DDE0260056795D /* TitleBuilder.swift in Sources */,
+				A79FB64621DC716E0056795D /* BuildersRegistrar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,7 +359,6 @@
 			files = (
 				A7D0B66021D9D29500F8BD5B /* ViewController.swift in Sources */,
 				A7D0B65E21D9D29500F8BD5B /* AppDelegate.swift in Sources */,
-				A7D0B69721D9EB2200F8BD5B /* AnotherViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -537,6 +589,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = VCStackFormExample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -560,6 +613,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = VCStackFormExample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

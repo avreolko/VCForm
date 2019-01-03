@@ -6,7 +6,6 @@
 //  Copyright © 2018 Valentin Cherepyanko. All rights reserved.
 //
 
-import UIKit
 import VCFormBuilder
 import VCExtensions
 
@@ -37,14 +36,20 @@ public class VCStackForm: UIView {
 
 		self.formBuilder.build(in: self.stackView)
 
-		self.updateContentSize()
+		DispatchQueue.main.async {
+			self.updateContentSize()
+		}
 	}
 }
 
 extension VCStackForm: IBuildersRegistrar {
 
-	public func register(_ builder: IFormViewBuilder, for id: String) {
-		self.formBuilder.register(builder, for: id)
+	public func builder(for type: IBuilderType) -> IFormViewBuilder? {
+		return self.formBuilder.builder(for: type)
+	}
+
+	public func register(_ builder: IFormViewBuilder, for type: IBuilderType) {
+		self.formBuilder.register(builder, for: type)
 	}
 }
 
