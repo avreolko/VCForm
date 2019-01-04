@@ -31,7 +31,6 @@ public class StackViewFormBuilder: IFormBuilder {
 		self.models.forEach { (model) in
 			if let builder = self.buildersRegistrar.builder(for: model.type) {
 				let view = builder.buildView(with: model.data)
-				view.setContentHuggingPriority(.required, for: .vertical)
 				stackView.addArrangedSubview(view)
 				view.sizeToFit()
 			}

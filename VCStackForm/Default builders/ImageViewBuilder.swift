@@ -18,6 +18,7 @@ public struct ImageViewBuilder: IFormViewBuilder, IFormViewConfigurator {
 	public func configure(_ view: View, with data: ViewData) {
 		view.image = data.image
 		view.contentMode = .scaleAspectFill
+		view.clipsToBounds = true
 		view.setConstraint(height: data.height)
 	}
 }

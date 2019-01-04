@@ -9,14 +9,16 @@
 import UIKit
 import VCFormBuilder
 
-public enum FormElementType: String, IBuilderType {
+public enum FormElementType: String {
 	case normalText
 	case image
 	case button
 	case field
 	case padding
 	case title
+}
 
+extension FormElementType: IBuilderType {
 	public var stringID: String {
 		return self.rawValue
 	}

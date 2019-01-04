@@ -17,14 +17,14 @@ public class VCStackForm: UIView {
 
 	public override init(frame: CGRect) {
 		super.init(frame: frame)
-		self.createSubviews()
 		self.configure()
+		self.createSubviews()
 	}
 
 	public required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
-		self.createSubviews()
 		self.configure()
+		self.createSubviews()
 	}
 
 	public func fill(with models: [FormElementModel]) {
@@ -75,7 +75,7 @@ private extension VCStackForm {
 	func configure() {
 		self.stackView.axis = .vertical
 		self.stackView.alignment = .fill
-		self.stackView.distribution = .fillProportionally
+		self.stackView.distribution = .fill
 	}
 
 	func updateContentSize() {

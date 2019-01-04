@@ -10,8 +10,8 @@ import UIKit
 import VCStackForm
 import VCFormBuilder
 
-
-class ViewController: UIViewController {
+class ScrollTestViewController: UIViewController {
+	
 	@IBOutlet weak var stackForm: VCStackForm!
 
 	override func viewDidLoad() {
@@ -20,15 +20,14 @@ class ViewController: UIViewController {
 	}
 }
 
-private extension ViewController {
+private extension ScrollTestViewController {
 	func fill() {
 		var models: [FormElementModel] = []
 
-		models.append((FormElementType.padding, 20))
 		models.append((FormElementType.image, (#imageLiteral(resourceName: "pasternak"), CGFloat(200))))
-		models.append((FormElementType.padding, 20))
-		models.append((FormElementType.title, " Пастернак Б.Л."))
-		models.append((FormElementType.title, " 1956"))
+		models.append((FormElementType.padding, 30))
+		models.append((FormElementType.title, "\tПастернак Б.Л."))
+		models.append((FormElementType.title, "\t1956"))
 		models.append((FormElementType.padding, 20))
 		models.append((FormElementType.normalText, """
 			Быть знаменитым некрасиво.
