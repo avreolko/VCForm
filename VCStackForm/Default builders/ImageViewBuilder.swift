@@ -12,14 +12,13 @@ import VCFormBuilder
 
 public struct ImageViewBuilder: IFormViewBuilder, IFormViewConfigurator {
 
-	public typealias ViewData = (image: UIImage, height: CGFloat)
+	public typealias ViewData = (image: UIImage, size: CGFloat)
 	public typealias View = UIImageView
 
 	public func configure(_ view: View, with data: ViewData) {
-		view.image = data.image
-		view.contentMode = .scaleAspectFill
+		view.image = data.image.resize(with: CGSize(width: CGFloat.greatestFiniteMagnitude, height: data.size))
+		view.contentMode = .scaleAspectFit
 		view.clipsToBounds = true
-		view.setConstraint(height: data.height)
 	}
 }
 

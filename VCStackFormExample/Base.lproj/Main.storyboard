@@ -136,16 +136,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PgI-Sl-F0H" customClass="VCStackForm" customModule="VCStackForm">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <rect key="frame" x="16" y="64" width="288" height="504"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="PgI-Sl-F0H" firstAttribute="bottom" secondItem="d7R-Dm-hA8" secondAttribute="bottom" id="BjR-Vr-E8r"/>
-                            <constraint firstItem="PgI-Sl-F0H" firstAttribute="leading" secondItem="d7R-Dm-hA8" secondAttribute="leading" id="Kcm-8b-TqG"/>
+                            <constraint firstItem="PgI-Sl-F0H" firstAttribute="leading" secondItem="d7R-Dm-hA8" secondAttribute="leading" constant="16" id="Kcm-8b-TqG"/>
                             <constraint firstItem="PgI-Sl-F0H" firstAttribute="top" secondItem="d7R-Dm-hA8" secondAttribute="top" id="dFI-DM-dLx"/>
-                            <constraint firstItem="PgI-Sl-F0H" firstAttribute="trailing" secondItem="d7R-Dm-hA8" secondAttribute="trailing" id="dlu-8A-oIB"/>
+                            <constraint firstItem="PgI-Sl-F0H" firstAttribute="trailing" secondItem="d7R-Dm-hA8" secondAttribute="trailing" constant="-16" id="dlu-8A-oIB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="d7R-Dm-hA8"/>
                     </view>

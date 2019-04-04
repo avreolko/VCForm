@@ -12,19 +12,19 @@ import VCExtensions
 public class VCStackForm: UIView {
 
 	private var scrollView = UIScrollView(frame: .zero)
-	public var stackView = UIStackView(frame: .zero)
+	private var stackView = UIStackView(frame: .zero)
 	private var formBuilder = StackViewFormBuilder()
 
 	public override init(frame: CGRect) {
 		super.init(frame: frame)
 		self.configure()
-		self.createSubviews()
+		self.placeSubviews()
 	}
 
 	public required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 		self.configure()
-		self.createSubviews()
+		self.placeSubviews()
 	}
 
 	public func fill(with models: [FormElementModel]) {
@@ -55,27 +55,21 @@ extension VCStackForm: IBuildersRegistrar {
 
 private extension VCStackForm {
 
-	func createSubviews() {
-		let contentView = UIView(frame: .zero)
-		self.addSubview(scrollView)
-		scrollView.addSubview(contentView)
+	func placeSubviews() {
+		self.addSubview(self.scrollView)
+		self.scrollView.setConstraint(edges: .zero, to: self)
+		self.scrollView.addSubview(stackView)
+		self.stackView.setConstraint(edges: .zero, to: self.scrollView)
 
-		scrollView.setConstraint(edges: .zero, to: self)
-		contentView.setConstraint(edges: .zero, to: scrollView)
-		contentView.setConstraint(centerX: 0, to: scrollView)
-		contentView.setConstraint(centerY: 0, to: scrollView)
-
-		contentView.addSubview(stackView)
-		stackView.setConstraint(leading: 0, to: contentView)
-		stackView.setConstraint(trailing: 0, to: contentView)
-		stackView.setConstraint(top: 0, to: contentView)
-		stackView.setConstraint(height: 200, priority: .defaultHigh)
+		self.stackView
+			.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor, multiplier: 1.0)
+			.isActive = true
 	}
 
 	func configure() {
 		self.stackView.axis = .vertical
 		self.stackView.alignment = .fill
-		self.stackView.distribution = .fill
+		self.stackView.distribution = .fillProportionally
 	}
 
 	func updateContentSize() {
