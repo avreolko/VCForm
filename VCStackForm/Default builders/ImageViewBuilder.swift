@@ -19,6 +19,7 @@ public struct ImageViewBuilder: IFormViewBuilder, IFormViewConfigurator {
 		view.image = data.image.resize(with: CGSize(width: CGFloat.greatestFiniteMagnitude, height: data.size))
 		view.contentMode = .scaleAspectFit
 		view.clipsToBounds = true
+		view.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
 	}
 }
 

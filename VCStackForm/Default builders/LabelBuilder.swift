@@ -20,7 +20,7 @@ public struct LabelBuilder: IFormViewBuilder, IFormViewConfigurator {
 		view.font = UIFont.systemFont(ofSize: 14)
 		view.lineBreakMode = .byWordWrapping
 		view.numberOfLines = 0
-		view.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
+		view.setContentCompressionResistancePriority(.required, for: .vertical)
 		view.setContentCompressionResistancePriority(.fittingSizeLevel, for: .horizontal)
 	}
 }
