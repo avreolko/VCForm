@@ -40,7 +40,9 @@ private extension ActionTextField {
 
 	@objc func changed() {
 		self.timer?.invalidate()
-		self.timer = Timer(timeInterval: self.changeDelay, repeats: false, block: { [weak self] (timer) in
+		self.timer = Timer.scheduledTimer(withTimeInterval: self.changeDelay,
+										  repeats: false,
+										  block: { [weak self] (timer) in
 			self?.changeHandler?()
 		})
 	}

@@ -9,22 +9,39 @@
 import VCFormBuilder
 import VCExtensions
 
+public struct VCStackFormConfiguration {
+
+	let showScrollIndicator: Bool
+	let isScrollEnabled: Bool
+	let contentInsets: UIEdgeInsets
+
+	public static var `default` =
+		VCStackFormConfiguration(showScrollIndicator: true, isScrollEnabled: true)
+
+	public init(showScrollIndicator: Bool = true,
+				isScrollEnabled: Bool = true,
+				contentInsets: UIEdgeInsets = .zero) {
+
+		self.showScrollIndicator = showScrollIndicator
+		self.isScrollEnabled = isScrollEnabled
+		self.contentInsets = contentInsets
+	}
+}
+
 public class VCStackForm: UIView {
 
 	private var scrollView = UIScrollView(frame: .zero)
-	public var stackView = UIStackView(frame: .zero)
+	private var stackView = UIStackView(frame: .zero)
 	private var formBuilder = StackViewFormBuilder()
 
 	public override init(frame: CGRect) {
 		super.init(frame: frame)
-		self.createSubviews()
-		self.configure()
+		self.setup()
 	}
 
 	public required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
-		self.createSubviews()
-		self.configure()
+		self.setup()
 	}
 
 	public func fill(with models: [FormElementModel]) {
@@ -38,6 +55,23 @@ public class VCStackForm: UIView {
 
 		DispatchQueue.main.async {
 			self.updateContentSize()
+		}
+	}
+
+	public func configure(with config: VCStackFormConfiguration) {
+		self.scrollView.showsVerticalScrollIndicator = config.showScrollIndicator
+		self.scrollView.isScrollEnabled = config.isScrollEnabled
+
+		if #available(iOS 11.0, *) {
+			self.stackView.directionalLayoutMargins =
+				NSDirectionalEdgeInsets(top: config.contentInsets.top,
+										leading: config.contentInsets.left,
+										bottom: config.contentInsets.bottom,
+										trailing: config.contentInsets.right)
+
+			self.stackView.isLayoutMarginsRelativeArrangement = true
+		} else {
+			self.stackView.layoutMargins = config.contentInsets
 		}
 	}
 }
@@ -55,24 +89,29 @@ extension VCStackForm: IBuildersRegistrar {
 
 private extension VCStackForm {
 
-	func createSubviews() {
-		let contentView = UIView(frame: .zero)
-		self.addSubview(scrollView)
-		scrollView.addSubview(contentView)
+	func setup() {
+		self.setupStackView()
+		self.placeSubviews()
 
-		scrollView.setConstraint(edges: .zero, to: self)
-		contentView.setConstraint(edges: .zero, to: scrollView)
-		contentView.setConstraint(centerX: 0, to: scrollView)
-		contentView.setConstraint(centerY: 0, to: scrollView)
-
-		contentView.addSubview(stackView)
-		stackView.setConstraint(leading: 0, to: contentView)
-		stackView.setConstraint(trailing: 0, to: contentView)
-		stackView.setConstraint(top: 0, to: contentView)
-		stackView.setConstraint(height: 200, priority: .defaultHigh)
+		self.configure(with: VCStackFormConfiguration.default)
+		self.setupConstraints()
 	}
 
-	func configure() {
+	func placeSubviews() {
+		self.addSubview(self.scrollView)
+		self.scrollView.addSubview(stackView)
+	}
+
+	func setupConstraints() {
+		self.scrollView.setConstraint(edges: .zero, to: self)
+		self.stackView.setConstraint(edges: .zero, to: self.scrollView)
+
+		self.stackView
+			.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor, multiplier: 1.0)
+			.isActive = true
+	}
+
+	func setupStackView() {
 		self.stackView.axis = .vertical
 		self.stackView.alignment = .fill
 		self.stackView.distribution = .fillProportionally

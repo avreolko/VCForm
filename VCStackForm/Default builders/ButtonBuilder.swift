@@ -16,6 +16,9 @@ public struct ButtonBuilder: IFormViewBuilder, IFormViewConfigurator {
 
 	public func configure(_ view: View, with data: ViewData) {
 		view.setTitle(data.title, for: .normal)
+		view.setTitleColor(.black, for: .normal)
+		view.backgroundColor = .lightGray
+		view.setContentCompressionResistancePriority(.required, for: .vertical)
 		view.tapHandler = data.changeHandler
 	}
 }

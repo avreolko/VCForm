@@ -21,5 +21,6 @@ public struct LabelBuilder: IFormViewBuilder, IFormViewConfigurator {
 		view.lineBreakMode = .byWordWrapping
 		view.numberOfLines = 0
 		view.setContentCompressionResistancePriority(.required, for: .vertical)
+		view.setContentCompressionResistancePriority(.fittingSizeLevel, for: .horizontal)
 	}
 }
