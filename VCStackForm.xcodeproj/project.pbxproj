@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A767A62F2259FA550046D5C6 /* IDynamicHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = A767A62E2259FA550046D5C6 /* IDynamicHeight.swift */; };
+		A767A631225A01290046D5C6 /* DynamicHeightViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A767A630225A01290046D5C6 /* DynamicHeightViewBuilder.swift */; };
+		A767A633225A017C0046D5C6 /* DynamicHeightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A767A632225A017C0046D5C6 /* DynamicHeightView.swift */; };
+		A767A635225A018A0046D5C6 /* DynamicHeightView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A767A634225A018A0046D5C6 /* DynamicHeightView.xib */; };
 		A79FB63821DC71630056795D /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79FB63621DC71630056795D /* ActionButton.swift */; };
 		A79FB63921DC71630056795D /* ActionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79FB63721DC71630056795D /* ActionTextField.swift */; };
 		A79FB64021DC71690056795D /* TextFieldBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79FB63B21DC71680056795D /* TextFieldBuilder.swift */; };
@@ -64,6 +68,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A767A62E2259FA550046D5C6 /* IDynamicHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDynamicHeight.swift; sourceTree = "<group>"; };
+		A767A630225A01290046D5C6 /* DynamicHeightViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicHeightViewBuilder.swift; sourceTree = "<group>"; };
+		A767A632225A017C0046D5C6 /* DynamicHeightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicHeightView.swift; sourceTree = "<group>"; };
+		A767A634225A018A0046D5C6 /* DynamicHeightView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DynamicHeightView.xib; sourceTree = "<group>"; };
 		A79FB63621DC71630056795D /* ActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		A79FB63721DC71630056795D /* ActionTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionTextField.swift; sourceTree = "<group>"; };
 		A79FB63B21DC71680056795D /* TextFieldBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldBuilder.swift; sourceTree = "<group>"; };
@@ -120,6 +128,8 @@
 			children = (
 				A79FB63621DC71630056795D /* ActionButton.swift */,
 				A79FB63721DC71630056795D /* ActionTextField.swift */,
+				A767A632225A017C0046D5C6 /* DynamicHeightView.swift */,
+				A767A634225A018A0046D5C6 /* DynamicHeightView.xib */,
 			);
 			path = "Custom views";
 			sourceTree = "<group>";
@@ -133,6 +143,7 @@
 				A79FB63E21DC71680056795D /* LabelBuilder.swift */,
 				A79FB63F21DC71680056795D /* PaddingBuilder.swift */,
 				A79FB64B21DC77E30056795D /* TitleBuilder.swift */,
+				A767A630225A01290046D5C6 /* DynamicHeightViewBuilder.swift */,
 			);
 			path = "Default builders";
 			sourceTree = "<group>";
@@ -194,6 +205,7 @@
 				A7D0B65421D9CDC400F8BD5B /* VCStackForm.swift */,
 				A79FB64521DC716D0056795D /* BuildersRegistrar.swift */,
 				A79FB64D21DDDAA00056795D /* FormElementType.swift */,
+				A767A62E2259FA550046D5C6 /* IDynamicHeight.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -307,6 +319,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A7D0B64B21D9CCA200F8BD5B /* Cartfile in Resources */,
+				A767A635225A018A0046D5C6 /* DynamicHeightView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -350,6 +363,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A79FB64E21DDDAA00056795D /* FormElementType.swift in Sources */,
+				A767A631225A01290046D5C6 /* DynamicHeightViewBuilder.swift in Sources */,
+				A767A62F2259FA550046D5C6 /* IDynamicHeight.swift in Sources */,
+				A767A633225A017C0046D5C6 /* DynamicHeightView.swift in Sources */,
 				A7D0B65521D9CDC400F8BD5B /* StackViewFormBuilder.swift in Sources */,
 				A79FB64121DC71690056795D /* ButtonBuilder.swift in Sources */,
 				A7D0B65621D9CDC400F8BD5B /* VCStackForm.swift in Sources */,

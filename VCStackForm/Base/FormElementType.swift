@@ -16,9 +16,10 @@ public enum FormElementType: String {
 	case field
 	case padding
 	case title
+	case dynamicHeight
 }
 
-extension FormElementType: IBuilderType {
+extension FormElementType: IFormElementType {
 	public var stringID: String {
 		return self.rawValue
 	}

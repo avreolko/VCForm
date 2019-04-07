@@ -41,6 +41,9 @@ private extension AllBuildersTestViewController {
 			print("Text field changed value")
 		}
 
+		let dynamicHeightData: (CGFloat, CGFloat) = (collapsedHeight: 50.0, expandedHeight: 150.0)
+		models.append((FormElementType.dynamicHeight, dynamicHeightData))
+
 		models.append((FormElementType.title, "Normal text test"))
 		models.append((FormElementType.normalText, "This is just normal text. It uses multiline UILabel and expands with it contents. It's height also taken into account when UIScrollView tries to calculate content size."))
 

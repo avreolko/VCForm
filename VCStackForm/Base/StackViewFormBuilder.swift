@@ -15,6 +15,8 @@ public class StackViewFormBuilder: IFormBuilder {
 	private let buildersRegistrar = BuildersRegistrar()
 	private var models: [FormElementModel] = []
 
+	public var elementHeightChangedHandler: ((CGFloat) -> Void)?
+
 	public init() { }
 
 	@discardableResult
@@ -32,6 +34,11 @@ public class StackViewFormBuilder: IFormBuilder {
 			if let builder = self.buildersRegistrar.builder(for: model.type) {
 				let view = builder.buildView(with: model.data)
 				stackView.addArrangedSubview(view)
+
+				(view as? IDynamicHeight).map { [weak self] in
+					$0.heightChangedHandler = self?.elementHeightChangedHandler
+				}
+
 				view.sizeToFit()
 			}
 		}
@@ -47,11 +54,11 @@ public class StackViewFormBuilder: IFormBuilder {
 }
 
 extension StackViewFormBuilder: IBuildersRegistrar {
-	public func builder(for type: IBuilderType) -> IFormViewBuilder? {
+	public func builder(for type: IFormElementType) -> IFormViewBuilder? {
 		return self.buildersRegistrar.builder(for: type)
 	}
 	
-	public func register(_ builder: IFormViewBuilder, for type: IBuilderType) {
+	public func register(_ builder: IFormViewBuilder, for type: IFormElementType) {
 		self.buildersRegistrar.register(builder, for: type)
 	}
 }

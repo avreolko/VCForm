@@ -18,6 +18,8 @@ public struct VCStackFormConfiguration {
 	let alignment: UIStackView.Alignment
 	let distribution: UIStackView.Distribution
 
+	let heightAnimationDuration: Double
+
 	public static var `default` =
 		VCStackFormConfiguration(showScrollIndicator: true, isScrollEnabled: true)
 
@@ -25,13 +27,15 @@ public struct VCStackFormConfiguration {
 				isScrollEnabled: Bool = true,
 				contentInsets: UIEdgeInsets = .zero,
 				alignment: UIStackView.Alignment = .fill,
-				distribution: UIStackView.Distribution = .fill) {
+				distribution: UIStackView.Distribution = .fill,
+				heightAnimationDuration: Double = 0.3) {
 
 		self.showScrollIndicator = showScrollIndicator
 		self.isScrollEnabled = isScrollEnabled
 		self.contentInsets = contentInsets
 		self.alignment = alignment
 		self.distribution = distribution
+		self.heightAnimationDuration = heightAnimationDuration
 	}
 }
 
@@ -39,6 +43,8 @@ public class VCStackForm: UIView {
 
 	private var scrollView = UIScrollView(frame: .zero)
 	private var stackView = UIStackView(frame: .zero)
+
+	private var config: VCStackFormConfiguration = .default
 	private var formBuilder = StackViewFormBuilder()
 
 	public override init(frame: CGRect) {
@@ -62,6 +68,8 @@ public class VCStackForm: UIView {
 	}
 
 	public func configure(with config: VCStackFormConfiguration) {
+		self.config = config
+
 		self.scrollView.showsVerticalScrollIndicator = config.showScrollIndicator
 		self.scrollView.isScrollEnabled = config.isScrollEnabled
 
@@ -84,11 +92,11 @@ public class VCStackForm: UIView {
 
 extension VCStackForm: IBuildersRegistrar {
 
-	public func builder(for type: IBuilderType) -> IFormViewBuilder? {
+	public func builder(for type: IFormElementType) -> IFormViewBuilder? {
 		return self.formBuilder.builder(for: type)
 	}
 
-	public func register(_ builder: IFormViewBuilder, for type: IBuilderType) {
+	public func register(_ builder: IFormViewBuilder, for type: IFormElementType) {
 		self.formBuilder.register(builder, for: type)
 	}
 }
@@ -101,6 +109,12 @@ private extension VCStackForm {
 
 		self.configure(with: VCStackFormConfiguration.default)
 		self.setupConstraints()
+
+		self.formBuilder.elementHeightChangedHandler = { [weak self] _ in
+			UIView.animate(withDuration: self?.config.heightAnimationDuration ?? 0.3, animations: {
+				self?.layoutIfNeeded()
+			})
+		}
 	}
 
 	func placeSubviews() {
