@@ -59,10 +59,6 @@ public class VCStackForm: UIView {
 		}
 
 		self.formBuilder.build(in: self.stackView)
-
-		DispatchQueue.main.async {
-			self.updateContentSize()
-		}
 	}
 
 	public func configure(with config: VCStackFormConfiguration) {
@@ -123,11 +119,5 @@ private extension VCStackForm {
 
 	func setupStackView() {
 		self.stackView.axis = .vertical
-	}
-
-	func updateContentSize() {
-		var contentSize = self.stackView.systemLayoutSizeFitting(UILayoutFittingExpandedSize)
-		contentSize.width = self.scrollView.frame.width
-		self.scrollView.contentSize = contentSize
 	}
 }
