@@ -15,16 +15,23 @@ public struct VCStackFormConfiguration {
 	let isScrollEnabled: Bool
 	let contentInsets: UIEdgeInsets
 
+	let alignment: UIStackView.Alignment
+	let distribution: UIStackView.Distribution
+
 	public static var `default` =
 		VCStackFormConfiguration(showScrollIndicator: true, isScrollEnabled: true)
 
 	public init(showScrollIndicator: Bool = true,
 				isScrollEnabled: Bool = true,
-				contentInsets: UIEdgeInsets = .zero) {
+				contentInsets: UIEdgeInsets = .zero,
+				alignment: UIStackView.Alignment = .fill,
+				distribution: UIStackView.Distribution = .fill) {
 
 		self.showScrollIndicator = showScrollIndicator
 		self.isScrollEnabled = isScrollEnabled
 		self.contentInsets = contentInsets
+		self.alignment = alignment
+		self.distribution = distribution
 	}
 }
 
@@ -61,6 +68,9 @@ public class VCStackForm: UIView {
 	public func configure(with config: VCStackFormConfiguration) {
 		self.scrollView.showsVerticalScrollIndicator = config.showScrollIndicator
 		self.scrollView.isScrollEnabled = config.isScrollEnabled
+
+		self.stackView.alignment = config.alignment
+		self.stackView.distribution = config.distribution
 
 		if #available(iOS 11.0, *) {
 			self.stackView.directionalLayoutMargins =
@@ -113,8 +123,6 @@ private extension VCStackForm {
 
 	func setupStackView() {
 		self.stackView.axis = .vertical
-		self.stackView.alignment = .fill
-		self.stackView.distribution = .fillProportionally
 	}
 
 	func updateContentSize() {
