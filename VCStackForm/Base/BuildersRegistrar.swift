@@ -15,11 +15,11 @@ public class BuildersRegistrar: IBuildersRegistrar {
 
 	public init() { }
 
-	public func builder(for type: IBuilderType) -> IFormViewBuilder? {
+	public func builder(for type: IFormElementType) -> IFormViewBuilder? {
 		return defaultBuilder(for: type.stringID) ?? customBuilder(for: type.stringID)
 	}
 
-	public func register(_ builder: IFormViewBuilder, for type: IBuilderType) {
+	public func register(_ builder: IFormViewBuilder, for type: IFormElementType) {
 		self.customBuilders[type.stringID] = builder
 	}
 }
@@ -34,6 +34,7 @@ private extension BuildersRegistrar {
 		case FormElementType.field.rawValue: return TextFieldBuilder()
 		case FormElementType.padding.rawValue: return PaddingBuilder()
 		case FormElementType.title.rawValue: return TitleBuilder()
+		case FormElementType.dynamicHeight.rawValue: return DynamicHeightViewBuilder()
 		default: return nil
 		}
 	}
