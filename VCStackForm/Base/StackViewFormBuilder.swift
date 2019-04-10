@@ -13,6 +13,7 @@ public class StackViewFormBuilder: IFormBuilder {
 	public typealias ContainerView = UIStackView
 
 	private let buildersRegistrar = BuildersRegistrar()
+
 	private var models: [FormElementModel] = []
 
 	public var elementHeightChangedHandler: ((CGFloat) -> Void)?
@@ -26,7 +27,8 @@ public class StackViewFormBuilder: IFormBuilder {
 	}
 
 	@discardableResult
-	public func build(in stackView: ContainerView) -> Self {
+	public func build(in stackView: ContainerView,
+					  dataViewHandler: (IFormElementType, IDataView) -> Void) -> Self {
 		
 		stackView.subviews.forEach { $0.removeFromSuperview() }
 
@@ -37,6 +39,10 @@ public class StackViewFormBuilder: IFormBuilder {
 
 				(view as? IDynamicHeight).map { [weak self] in
 					$0.heightChangedHandler = self?.elementHeightChangedHandler
+				}
+
+				(view as? IDataView).map {
+					dataViewHandler(model.type, $0)
 				}
 
 				view.sizeToFit()

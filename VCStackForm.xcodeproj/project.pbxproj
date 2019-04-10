@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A7077C5F225E318700934EE2 /* VCWeakContainer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7077C5E225E318700934EE2 /* VCWeakContainer.framework */; };
 		A767A62F2259FA550046D5C6 /* IDynamicHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = A767A62E2259FA550046D5C6 /* IDynamicHeight.swift */; };
 		A767A631225A01290046D5C6 /* DynamicHeightViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A767A630225A01290046D5C6 /* DynamicHeightViewBuilder.swift */; };
 		A767A633225A017C0046D5C6 /* DynamicHeightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A767A632225A017C0046D5C6 /* DynamicHeightView.swift */; };
@@ -68,6 +69,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A7077C5E225E318700934EE2 /* VCWeakContainer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VCWeakContainer.framework; path = Carthage/Build/iOS/VCWeakContainer.framework; sourceTree = "<group>"; };
 		A767A62E2259FA550046D5C6 /* IDynamicHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDynamicHeight.swift; sourceTree = "<group>"; };
 		A767A630225A01290046D5C6 /* DynamicHeightViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicHeightViewBuilder.swift; sourceTree = "<group>"; };
 		A767A632225A017C0046D5C6 /* DynamicHeightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicHeightView.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 			files = (
 				A7D0B64F21D9CD2400F8BD5B /* VCExtensions.framework in Frameworks */,
 				A7D0B65021D9CD2400F8BD5B /* VCFormBuilder.framework in Frameworks */,
+				A7077C5F225E318700934EE2 /* VCWeakContainer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,6 +195,7 @@
 		A7D0B64C21D9CD2400F8BD5B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A7077C5E225E318700934EE2 /* VCWeakContainer.framework */,
 				A7D0B64D21D9CD2400F8BD5B /* VCExtensions.framework */,
 				A7D0B64E21D9CD2400F8BD5B /* VCFormBuilder.framework */,
 			);
@@ -346,6 +350,7 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/VCExtensions.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/VCFormBuilder.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/VCWeakContainer.framework",
 			);
 			outputFileListPaths = (
 			);

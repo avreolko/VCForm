@@ -8,6 +8,7 @@
 
 import VCFormBuilder
 import VCExtensions
+import VCWeakContainer
 
 public struct VCStackFormConfiguration {
 
@@ -47,6 +48,8 @@ public class VCStackForm: UIView {
 	private var config: VCStackFormConfiguration = .default
 	private var formBuilder = StackViewFormBuilder()
 
+	private var dataViews: [(IFormElementType, Weak<IDataView>)] = []
+
 	public override init(frame: CGRect) {
 		super.init(frame: frame)
 		self.setup()
@@ -64,7 +67,9 @@ public class VCStackForm: UIView {
 			self.formBuilder.append(model)
 		}
 
-		self.formBuilder.build(in: self.stackView)
+		self.formBuilder.build(in: self.stackView) { [weak self] (type, dataView) in
+			self?.dataViews.append((type, Weak(dataView)))
+		}
 	}
 
 	public func configure(with config: VCStackFormConfiguration) {
@@ -86,6 +91,14 @@ public class VCStackForm: UIView {
 			self.stackView.isLayoutMarginsRelativeArrangement = true
 		} else {
 			self.stackView.layoutMargins = config.contentInsets
+		}
+	}
+
+	public func update(_ elementType: IFormElementType, with data: Any) {
+		self.dataViews.forEach { (type, dataView) in
+			if type.stringID == elementType.stringID {
+				dataView.object?.update(with: data)
+			}
 		}
 	}
 }
