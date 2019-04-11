@@ -20,7 +20,7 @@
 		A79FB64321DC71690056795D /* LabelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79FB63E21DC71680056795D /* LabelBuilder.swift */; };
 		A79FB64421DC71690056795D /* PaddingBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79FB63F21DC71680056795D /* PaddingBuilder.swift */; };
 		A79FB64621DC716E0056795D /* BuildersRegistrar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79FB64521DC716D0056795D /* BuildersRegistrar.swift */; };
-		A79FB64E21DDDAA00056795D /* FormElementType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79FB64D21DDDAA00056795D /* FormElementType.swift */; };
+		A79FB64E21DDDAA00056795D /* DefaultFormElementType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79FB64D21DDDAA00056795D /* DefaultFormElementType.swift */; };
 		A79FB64F21DDE0260056795D /* TitleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79FB64B21DC77E30056795D /* TitleBuilder.swift */; };
 		A79FB65221DF44F70056795D /* AllBuildersTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79FB65121DF44F70056795D /* AllBuildersTestViewController.swift */; };
 		A7D0B64421D9CC9600F8BD5B /* VCStackForm.h in Headers */ = {isa = PBXBuildFile; fileRef = A7D0B64221D9CC9600F8BD5B /* VCStackForm.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -83,7 +83,7 @@
 		A79FB63F21DC71680056795D /* PaddingBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddingBuilder.swift; sourceTree = "<group>"; };
 		A79FB64521DC716D0056795D /* BuildersRegistrar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildersRegistrar.swift; sourceTree = "<group>"; };
 		A79FB64B21DC77E30056795D /* TitleBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleBuilder.swift; sourceTree = "<group>"; };
-		A79FB64D21DDDAA00056795D /* FormElementType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormElementType.swift; sourceTree = "<group>"; };
+		A79FB64D21DDDAA00056795D /* DefaultFormElementType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFormElementType.swift; sourceTree = "<group>"; };
 		A79FB65121DF44F70056795D /* AllBuildersTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllBuildersTestViewController.swift; sourceTree = "<group>"; };
 		A7D0B63F21D9CC9600F8BD5B /* VCStackForm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VCStackForm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7D0B64221D9CC9600F8BD5B /* VCStackForm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VCStackForm.h; sourceTree = "<group>"; };
@@ -208,7 +208,7 @@
 				A7D0B65321D9CDC400F8BD5B /* StackViewFormBuilder.swift */,
 				A7D0B65421D9CDC400F8BD5B /* VCStackForm.swift */,
 				A79FB64521DC716D0056795D /* BuildersRegistrar.swift */,
-				A79FB64D21DDDAA00056795D /* FormElementType.swift */,
+				A79FB64D21DDDAA00056795D /* DefaultFormElementType.swift */,
 				A767A62E2259FA550046D5C6 /* IDynamicHeight.swift */,
 			);
 			path = Base;
@@ -367,7 +367,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A79FB64E21DDDAA00056795D /* FormElementType.swift in Sources */,
+				A79FB64E21DDDAA00056795D /* DefaultFormElementType.swift in Sources */,
 				A767A631225A01290046D5C6 /* DynamicHeightViewBuilder.swift in Sources */,
 				A767A62F2259FA550046D5C6 /* IDynamicHeight.swift in Sources */,
 				A767A633225A017C0046D5C6 /* DynamicHeightView.swift in Sources */,
