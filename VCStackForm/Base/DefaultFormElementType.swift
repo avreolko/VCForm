@@ -1,5 +1,5 @@
 //
-//  FormElementType.swift
+//  DefaultFormElementType.swift
 //  VCStackForm
 //
 //  Created by Valentin Cherepyanko on 03/01/2019.
@@ -9,7 +9,7 @@
 import UIKit
 import VCFormBuilder
 
-public enum FormElementType: String {
+public enum DefaultFormElementType: String {
 	case normalText
 	case image
 	case button
@@ -19,7 +19,7 @@ public enum FormElementType: String {
 	case dynamicHeight
 }
 
-extension FormElementType: IFormElementType {
+extension DefaultFormElementType: IFormElementType {
 	public var stringID: String {
 		return self.rawValue
 	}

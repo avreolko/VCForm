@@ -42,27 +42,27 @@ private extension AllBuildersTestViewController {
 		}
 
 		let dynamicHeightData: (CGFloat, CGFloat) = (collapsedHeight: 50.0, expandedHeight: 150.0)
-		models.append((FormElementType.dynamicHeight, dynamicHeightData))
+		models.append((DefaultFormElementType.dynamicHeight, dynamicHeightData))
 
-		models.append((FormElementType.title, "Normal text test"))
-		models.append((FormElementType.normalText, "This is just normal text. It uses multiline UILabel and expands with it contents. It's height also taken into account when UIScrollView tries to calculate content size."))
-
-
-		models.append((FormElementType.padding, 20))
-		models.append((FormElementType.title, "Button test"))
-		models.append((FormElementType.normalText, "For button was written custom class with possibility to assign tap handler, that executes every time when button is tapped. Try to tap on it and see in console for some events."))
-		models.append((FormElementType.button, buttonData))
+		models.append((DefaultFormElementType.title, "Normal text test"))
+		models.append((DefaultFormElementType.normalText, "This is just normal text. It uses multiline UILabel and expands with it contents. It's height also taken into account when UIScrollView tries to calculate content size."))
 
 
-		models.append((FormElementType.padding, 20))
-		models.append((FormElementType.title, "Text field test"))
-		models.append((FormElementType.normalText, "Same as button, it uses custom class with change handler."))
-		models.append((FormElementType.field, fieldData))
+		models.append((DefaultFormElementType.padding, 20))
+		models.append((DefaultFormElementType.title, "Button test"))
+		models.append((DefaultFormElementType.normalText, "For button was written custom class with possibility to assign tap handler, that executes every time when button is tapped. Try to tap on it and see in console for some events."))
+		models.append((DefaultFormElementType.button, buttonData))
 
-		models.append((FormElementType.padding, 20))
-		models.append((FormElementType.title, "Image test"))
-		models.append((FormElementType.normalText, "First parameter in data is image itself, second one is the height of UIImageView. If you pass just '200', compiler will think that it's Int, not CGFloat. You should be careful about types of passed data. Or your view will not be configured."))
-		models.append((FormElementType.image, (#imageLiteral(resourceName: "image"), CGFloat(200))))
+
+		models.append((DefaultFormElementType.padding, 20))
+		models.append((DefaultFormElementType.title, "Text field test"))
+		models.append((DefaultFormElementType.normalText, "Same as button, it uses custom class with change handler."))
+		models.append((DefaultFormElementType.field, fieldData))
+
+		models.append((DefaultFormElementType.padding, 20))
+		models.append((DefaultFormElementType.title, "Image test"))
+		models.append((DefaultFormElementType.normalText, "First parameter in data is image itself, second one is the height of UIImageView. If you pass just '200', compiler will think that it's Int, not CGFloat. You should be careful about types of passed data. Or your view will not be configured."))
+		models.append((DefaultFormElementType.image, (#imageLiteral(resourceName: "image"), CGFloat(200))))
 
 		self.stackForm.fill(with: models)
 	}

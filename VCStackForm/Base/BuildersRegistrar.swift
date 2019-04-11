@@ -28,13 +28,13 @@ private extension BuildersRegistrar {
 
 	func defaultBuilder(for typeID: String) -> IFormViewBuilder? {
 		switch typeID {
-		case FormElementType.normalText.rawValue: return LabelBuilder()
-		case FormElementType.image.rawValue: return ImageViewBuilder()
-		case FormElementType.button.rawValue: return ButtonBuilder()
-		case FormElementType.field.rawValue: return TextFieldBuilder()
-		case FormElementType.padding.rawValue: return PaddingBuilder()
-		case FormElementType.title.rawValue: return TitleBuilder()
-		case FormElementType.dynamicHeight.rawValue: return DynamicHeightViewBuilder()
+		case DefaultFormElementType.normalText.rawValue: return LabelBuilder()
+		case DefaultFormElementType.image.rawValue: return ImageViewBuilder()
+		case DefaultFormElementType.button.rawValue: return ButtonBuilder()
+		case DefaultFormElementType.field.rawValue: return TextFieldBuilder()
+		case DefaultFormElementType.padding.rawValue: return PaddingBuilder()
+		case DefaultFormElementType.title.rawValue: return TitleBuilder()
+		case DefaultFormElementType.dynamicHeight.rawValue: return DynamicHeightViewBuilder()
 		default: return nil
 		}
 	}

@@ -32,54 +32,54 @@ private extension ScrollTestViewController {
 	func fillForm() {
 		var models: [FormElementModel] = []
 
-		models.append((FormElementType.image, (#imageLiteral(resourceName: "pasternak"), CGFloat(200))))
-		models.append((FormElementType.padding, 30))
-		models.append((FormElementType.title, "Пастернак Б.Л."))
-		models.append((FormElementType.title, "1956"))
-		models.append((FormElementType.padding, 20))
-		models.append((FormElementType.normalText, """
+		models.append((DefaultFormElementType.image, (#imageLiteral(resourceName: "pasternak"), CGFloat(200))))
+		models.append((DefaultFormElementType.padding, 30))
+		models.append((DefaultFormElementType.title, "Пастернак Б.Л."))
+		models.append((DefaultFormElementType.title, "1956"))
+		models.append((DefaultFormElementType.padding, 20))
+		models.append((DefaultFormElementType.normalText, """
 		Быть знаменитым некрасиво.
 		Не это подымает ввысь.
 		Не надо заводить архива,
 		Над рукописями трястись.
 		"""))
-		models.append((FormElementType.padding, 20))
-		models.append((FormElementType.normalText, """
+		models.append((DefaultFormElementType.padding, 20))
+		models.append((DefaultFormElementType.normalText, """
 		Цель творчества - самоотдача,
 		А не шумиха, не успех.
 		Позорно, ничего не знача,
 		Быть притчей на устах у всех.
 		"""))
-		models.append((FormElementType.padding, 20))
-		models.append((FormElementType.normalText, """
+		models.append((DefaultFormElementType.padding, 20))
+		models.append((DefaultFormElementType.normalText, """
 		Но надо жить без самозванства,
 		Так жить, чтобы в конце концов
 		Привлечь к себе любовь пространства,
 		Услышать будущего зов.
 		"""))
-		models.append((FormElementType.padding, 20))
-		models.append((FormElementType.normalText, """
+		models.append((DefaultFormElementType.padding, 20))
+		models.append((DefaultFormElementType.normalText, """
 		И надо оставлять пробелы
 		В судьбе, а не среди бумаг,
 		Места и главы жизни целой
 		Отчеркивая на полях.
 		"""))
-		models.append((FormElementType.padding, 20))
-		models.append((FormElementType.normalText, """
+		models.append((DefaultFormElementType.padding, 20))
+		models.append((DefaultFormElementType.normalText, """
 		И окунаться в неизвестность,
 		И прятать в ней свои шаги,
 		Как прячется в тумане местность,
 		Когда в ней не видать ни зги.
 		"""))
-		models.append((FormElementType.padding, 20))
-		models.append((FormElementType.normalText, """
+		models.append((DefaultFormElementType.padding, 20))
+		models.append((DefaultFormElementType.normalText, """
 		Другие по живому следу
 		Пройдут твой путь за пядью пядь,
 		Но пораженья от победы
 		Ты сам не должен отличать.
 		"""))
-		models.append((FormElementType.padding, 20))
-		models.append((FormElementType.normalText, """
+		models.append((DefaultFormElementType.padding, 20))
+		models.append((DefaultFormElementType.normalText, """
 		И должен ни единой долькой
 		Не отступаться от лица,
 		Но быть живым, живым и только,
