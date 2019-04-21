@@ -28,7 +28,7 @@ public class StackViewFormBuilder: IFormBuilder {
 
 	@discardableResult
 	public func build(in stackView: ContainerView,
-					  dataViewHandler: (IFormElementType, IDataView) -> Void) -> Self {
+					  viewHandler: (IFormElementType, UIView) -> Void) -> Self {
 		
 		stackView.subviews.forEach { $0.removeFromSuperview() }
 
@@ -41,9 +41,7 @@ public class StackViewFormBuilder: IFormBuilder {
 					$0.heightChangedHandler = self?.elementHeightChangedHandler
 				}
 
-				(view as? IDataView).map {
-					dataViewHandler(model.type, $0)
-				}
+				viewHandler(model.type, view)
 
 				view.sizeToFit()
 			}

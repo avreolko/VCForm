@@ -33,8 +33,11 @@ private extension AllBuildersTestViewController {
 	func fillForm() {
 		var models: [FormElementModel] = []
 
-		let buttonData = ("Button", {
-			print("Button tapped")
+
+		var hidden = false
+		let buttonData = ("Hide or show image", {
+			hidden = !hidden
+			self.stackForm.hide(hidden, type: DefaultFormElementType.image)
 		})
 
 		let fieldData = {

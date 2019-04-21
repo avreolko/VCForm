@@ -16,7 +16,7 @@ public class BuildersRegistrar: IBuildersRegistrar {
 	public init() { }
 
 	public func builder(for type: IFormElementType) -> IFormViewBuilder? {
-		return defaultBuilder(for: type.stringID) ?? customBuilder(for: type.stringID)
+		return self.defaultBuilder(for: type.stringID) ?? customBuilder(for: type.stringID)
 	}
 
 	public func register(_ builder: IFormViewBuilder, for type: IFormElementType) {
