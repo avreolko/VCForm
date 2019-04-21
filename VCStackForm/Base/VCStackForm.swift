@@ -10,36 +10,6 @@ import VCFormBuilder
 import VCExtensions
 import VCWeakContainer
 
-public struct VCStackFormConfiguration {
-
-	let showScrollIndicator: Bool
-	let isScrollEnabled: Bool
-	let contentInsets: UIEdgeInsets
-
-	let alignment: UIStackView.Alignment
-	let distribution: UIStackView.Distribution
-
-	let heightAnimationDuration: Double
-
-	public static var `default` =
-		VCStackFormConfiguration(showScrollIndicator: true, isScrollEnabled: true)
-
-	public init(showScrollIndicator: Bool = true,
-				isScrollEnabled: Bool = true,
-				contentInsets: UIEdgeInsets = .zero,
-				alignment: UIStackView.Alignment = .fill,
-				distribution: UIStackView.Distribution = .fill,
-				heightAnimationDuration: Double = 0.3) {
-
-		self.showScrollIndicator = showScrollIndicator
-		self.isScrollEnabled = isScrollEnabled
-		self.contentInsets = contentInsets
-		self.alignment = alignment
-		self.distribution = distribution
-		self.heightAnimationDuration = heightAnimationDuration
-	}
-}
-
 public class VCStackForm: UIView {
 
 	private var scrollView = UIScrollView(frame: .zero)
@@ -48,7 +18,7 @@ public class VCStackForm: UIView {
 	private var config: VCStackFormConfiguration = .default
 	private var formBuilder = StackViewFormBuilder()
 
-	private var dataViews: [(IFormElementType, Weak<IDataView>)] = []
+	private var elements: [(IFormElementType, Weak<UIView>)] = []
 
 	public override init(frame: CGRect) {
 		super.init(frame: frame)
@@ -61,14 +31,15 @@ public class VCStackForm: UIView {
 	}
 
 	public func fill(with models: [FormElementModel]) {
+		self.reset()
 		self.formBuilder.reset()
 
 		models.forEach { (model) in
 			self.formBuilder.append(model)
 		}
 
-		self.formBuilder.build(in: self.stackView) { [weak self] (type, dataView) in
-			self?.dataViews.append((type, Weak(dataView)))
+		self.formBuilder.build(in: self.stackView) { [weak self] (type, view) in
+			self?.elements.append((type, Weak(view)))
 		}
 	}
 
@@ -95,11 +66,28 @@ public class VCStackForm: UIView {
 	}
 
 	public func update(_ elementType: IFormElementType, with data: Any) {
-		self.dataViews.forEach { (type, dataView) in
-			if type.stringID == elementType.stringID {
-				dataView.object?.update(with: data)
-			}
-		}
+		// todo: добавить ассерты на случай, когда элемент с таким id есть, но не является IDataView
+		self.elements
+			.filter { $0.0.stringID == elementType.stringID }
+			.forEach { ($0.1.object as? IDataView)?.update(with: data) }
+	}
+
+	public func hide(_ elementType: IFormElementType) {
+		self.hide(true, type: elementType)
+	}
+
+	public func show(_ elementType: IFormElementType) {
+		self.hide(false, type: elementType)
+	}
+
+	public func hide(_ hide: Bool, type: IFormElementType) {
+		self.elements
+			.filter { $0.0.stringID == type.stringID }
+			.forEach { $0.1.object?.isHidden = hide }
+
+		UIView.animate(withDuration: self.config.heightAnimationDuration, animations: {
+			self.layoutIfNeeded()
+		})
 	}
 }
 
@@ -114,6 +102,7 @@ extension VCStackForm: IBuildersRegistrar {
 	}
 }
 
+// MARK: setup
 private extension VCStackForm {
 
 	func setup() {
@@ -123,8 +112,9 @@ private extension VCStackForm {
 		self.configure(with: VCStackFormConfiguration.default)
 		self.setupConstraints()
 
-		self.formBuilder.elementHeightChangedHandler = { [weak self] _ in
-			UIView.animate(withDuration: self?.config.heightAnimationDuration ?? 0.3, animations: {
+		let animationDuration = self.config.heightAnimationDuration
+		self.formBuilder.elementHeightChangedHandler = { _ in
+			UIView.animate(withDuration: animationDuration, animations: { [weak self] in
 				self?.layoutIfNeeded()
 			})
 		}
@@ -146,5 +136,14 @@ private extension VCStackForm {
 
 	func setupStackView() {
 		self.stackView.axis = .vertical
+	}
+}
+
+// MARK: utility
+private extension VCStackForm {
+
+	func reset() {
+		self.elements.forEach { $0.1.object?.removeFromSuperview() }
+		self.elements = []
 	}
 }

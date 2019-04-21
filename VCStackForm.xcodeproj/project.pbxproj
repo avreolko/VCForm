@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A7077C5F225E318700934EE2 /* VCWeakContainer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7077C5E225E318700934EE2 /* VCWeakContainer.framework */; };
+		A75BF12B226C214300736023 /* VCStackFormConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75BF12A226C214300736023 /* VCStackFormConfiguration.swift */; };
 		A767A62F2259FA550046D5C6 /* IDynamicHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = A767A62E2259FA550046D5C6 /* IDynamicHeight.swift */; };
 		A767A631225A01290046D5C6 /* DynamicHeightViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A767A630225A01290046D5C6 /* DynamicHeightViewBuilder.swift */; };
 		A767A633225A017C0046D5C6 /* DynamicHeightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A767A632225A017C0046D5C6 /* DynamicHeightView.swift */; };
@@ -70,6 +71,7 @@
 
 /* Begin PBXFileReference section */
 		A7077C5E225E318700934EE2 /* VCWeakContainer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VCWeakContainer.framework; path = Carthage/Build/iOS/VCWeakContainer.framework; sourceTree = "<group>"; };
+		A75BF12A226C214300736023 /* VCStackFormConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCStackFormConfiguration.swift; sourceTree = "<group>"; };
 		A767A62E2259FA550046D5C6 /* IDynamicHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDynamicHeight.swift; sourceTree = "<group>"; };
 		A767A630225A01290046D5C6 /* DynamicHeightViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicHeightViewBuilder.swift; sourceTree = "<group>"; };
 		A767A632225A017C0046D5C6 /* DynamicHeightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicHeightView.swift; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				A7D0B65321D9CDC400F8BD5B /* StackViewFormBuilder.swift */,
+				A75BF12A226C214300736023 /* VCStackFormConfiguration.swift */,
 				A7D0B65421D9CDC400F8BD5B /* VCStackForm.swift */,
 				A79FB64521DC716D0056795D /* BuildersRegistrar.swift */,
 				A79FB64D21DDDAA00056795D /* DefaultFormElementType.swift */,
@@ -371,6 +374,7 @@
 				A767A631225A01290046D5C6 /* DynamicHeightViewBuilder.swift in Sources */,
 				A767A62F2259FA550046D5C6 /* IDynamicHeight.swift in Sources */,
 				A767A633225A017C0046D5C6 /* DynamicHeightView.swift in Sources */,
+				A75BF12B226C214300736023 /* VCStackFormConfiguration.swift in Sources */,
 				A7D0B65521D9CDC400F8BD5B /* StackViewFormBuilder.swift in Sources */,
 				A79FB64121DC71690056795D /* ButtonBuilder.swift in Sources */,
 				A7D0B65621D9CDC400F8BD5B /* VCStackForm.swift in Sources */,
