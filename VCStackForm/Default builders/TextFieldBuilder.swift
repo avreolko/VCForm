@@ -10,12 +10,14 @@ import UIKit
 import VCFormBuilder
 import VCExtensions
 
-public struct TextFieldBuilder: IFormViewBuilder, IFormViewConfigurator {
+struct TextFieldBuilder: IFormViewBuilder, IFormViewConfigurator {
 
-	public typealias ViewData = () -> Void
-	public typealias View = ActionTextField
+	let buildingMethod: ViewBuildingMethod = .manual
 
-	public func configure(_ view: View, with data: @escaping ViewData) {
+	typealias ViewData = () -> Void
+	typealias View = ActionTextField
+
+	func configure(_ view: View, with data: @escaping ViewData) {
 		view.changeDelay = 0.01
 		view.borderStyle = .roundedRect
 		view.setConstraint(height: 40)

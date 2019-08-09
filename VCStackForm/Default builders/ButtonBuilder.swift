@@ -9,12 +9,14 @@
 import UIKit
 import VCFormBuilder
 
-public struct ButtonBuilder: IFormViewBuilder, IFormViewConfigurator {
+struct ButtonBuilder: IFormViewBuilder, IFormViewConfigurator {
 
-	public typealias ViewData = (title: String, changeHandler: () -> Void)
-	public typealias View = ActionButton
+	let buildingMethod: ViewBuildingMethod = .manual
 
-	public func configure(_ view: View, with data: ViewData) {
+	typealias ViewData = (title: String, changeHandler: () -> Void)
+	typealias View = ActionButton
+
+	func configure(_ view: View, with data: ViewData) {
 		view.setTitle(data.title, for: .normal)
 		view.setTitleColor(.black, for: .normal)
 		view.backgroundColor = .lightGray

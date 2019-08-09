@@ -9,12 +9,14 @@
 import UIKit
 import VCFormBuilder
 
-public struct LabelBuilder: IFormViewBuilder, IFormViewConfigurator {
-	
-	public typealias ViewData = String
-	public typealias View = UILabel
+struct LabelBuilder: IFormViewBuilder, IFormViewConfigurator {
 
-	public func configure(_ view: View, with data: ViewData) {
+	let buildingMethod: ViewBuildingMethod = .manual
+
+	typealias ViewData = String
+	typealias View = UILabel
+
+	func configure(_ view: View, with data: ViewData) {
 		view.text = data
 
 		view.font = UIFont.systemFont(ofSize: 14)
