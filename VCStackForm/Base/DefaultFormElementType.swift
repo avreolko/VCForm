@@ -20,7 +20,20 @@ public enum DefaultFormElementType: String {
 }
 
 extension DefaultFormElementType: IFormElementType {
-	public var stringID: String {
+
+	public var id: String {
 		return self.rawValue
+	}
+
+	public var formViewBuilder: IFormViewBuilder {
+		switch self {
+		case .normalText: return LabelBuilder()
+		case .image: return ImageViewBuilder()
+		case .button: return ButtonBuilder()
+		case .field: return TextFieldBuilder()
+		case .padding: return PaddingBuilder()
+		case .title: return TitleBuilder()
+		case .dynamicHeight: return DynamicHeightViewBuilder()
+		}
 	}
 }

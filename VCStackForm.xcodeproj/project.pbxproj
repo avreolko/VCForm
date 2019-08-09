@@ -20,7 +20,6 @@
 		A79FB64221DC71690056795D /* ImageViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79FB63D21DC71680056795D /* ImageViewBuilder.swift */; };
 		A79FB64321DC71690056795D /* LabelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79FB63E21DC71680056795D /* LabelBuilder.swift */; };
 		A79FB64421DC71690056795D /* PaddingBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79FB63F21DC71680056795D /* PaddingBuilder.swift */; };
-		A79FB64621DC716E0056795D /* BuildersRegistrar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79FB64521DC716D0056795D /* BuildersRegistrar.swift */; };
 		A79FB64E21DDDAA00056795D /* DefaultFormElementType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79FB64D21DDDAA00056795D /* DefaultFormElementType.swift */; };
 		A79FB64F21DDE0260056795D /* TitleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79FB64B21DC77E30056795D /* TitleBuilder.swift */; };
 		A79FB65221DF44F70056795D /* AllBuildersTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79FB65121DF44F70056795D /* AllBuildersTestViewController.swift */; };
@@ -83,7 +82,6 @@
 		A79FB63D21DC71680056795D /* ImageViewBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewBuilder.swift; sourceTree = "<group>"; };
 		A79FB63E21DC71680056795D /* LabelBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelBuilder.swift; sourceTree = "<group>"; };
 		A79FB63F21DC71680056795D /* PaddingBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddingBuilder.swift; sourceTree = "<group>"; };
-		A79FB64521DC716D0056795D /* BuildersRegistrar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildersRegistrar.swift; sourceTree = "<group>"; };
 		A79FB64B21DC77E30056795D /* TitleBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleBuilder.swift; sourceTree = "<group>"; };
 		A79FB64D21DDDAA00056795D /* DefaultFormElementType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFormElementType.swift; sourceTree = "<group>"; };
 		A79FB65121DF44F70056795D /* AllBuildersTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllBuildersTestViewController.swift; sourceTree = "<group>"; };
@@ -210,7 +208,6 @@
 				A7D0B65321D9CDC400F8BD5B /* StackViewFormBuilder.swift */,
 				A75BF12A226C214300736023 /* VCStackFormConfiguration.swift */,
 				A7D0B65421D9CDC400F8BD5B /* VCStackForm.swift */,
-				A79FB64521DC716D0056795D /* BuildersRegistrar.swift */,
 				A79FB64D21DDDAA00056795D /* DefaultFormElementType.swift */,
 				A767A62E2259FA550046D5C6 /* IDynamicHeight.swift */,
 			);
@@ -385,7 +382,6 @@
 				A79FB64221DC71690056795D /* ImageViewBuilder.swift in Sources */,
 				A79FB63921DC71630056795D /* ActionTextField.swift in Sources */,
 				A79FB64F21DDE0260056795D /* TitleBuilder.swift in Sources */,
-				A79FB64621DC716E0056795D /* BuildersRegistrar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

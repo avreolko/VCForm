@@ -68,7 +68,7 @@ public class VCStackForm: UIView {
 	public func update(_ elementType: IFormElementType, with data: Any) {
 		// todo: добавить ассерты на случай, когда элемент с таким id есть, но не является IDataView
 		self.elements
-			.filter { $0.0.stringID == elementType.stringID }
+			.filter { $0.0.id == elementType.id }
 			.forEach { ($0.1.object as? IDataView)?.update(with: data) }
 	}
 
@@ -82,23 +82,12 @@ public class VCStackForm: UIView {
 
 	public func hide(_ hide: Bool, type: IFormElementType) {
 		self.elements
-			.filter { $0.0.stringID == type.stringID }
+			.filter { $0.0.id == type.id }
 			.forEach { $0.1.object?.isHidden = hide }
 
 		UIView.animate(withDuration: self.config.heightAnimationDuration, animations: {
 			self.layoutIfNeeded()
 		})
-	}
-}
-
-extension VCStackForm: IBuildersRegistrar {
-
-	public func builder(for type: IFormElementType) -> IFormViewBuilder? {
-		return self.formBuilder.builder(for: type)
-	}
-
-	public func register(_ builder: IFormViewBuilder, for type: IFormElementType) {
-		self.formBuilder.register(builder, for: type)
 	}
 }
 
