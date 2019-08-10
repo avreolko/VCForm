@@ -6,9 +6,7 @@
 //  Copyright © 2018 Valentin Cherepyanko. All rights reserved.
 //
 
-import UIKit
 import VCStackForm
-import VCFormBuilder
 
 class ScrollTestViewController: UIViewController {
 	

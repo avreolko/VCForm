@@ -6,9 +6,12 @@
 //  Copyright © 2018 Valentin Cherepyanko. All rights reserved.
 //
 
-import VCFormBuilder
 import VCExtensions
 import VCWeakContainer
+
+protocol VCStackFormDelegate {
+	func provideBuilder(for: IFormElementType) -> IFormViewBuilder
+}
 
 public class VCStackForm: UIView {
 

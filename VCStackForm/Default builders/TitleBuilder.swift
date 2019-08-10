@@ -6,9 +6,6 @@
 //  Copyright © 2019 Valentin Cherepyanko. All rights reserved.
 //
 
-import UIKit
-import VCFormBuilder
-
 struct TitleBuilder: IFormViewBuilder, IFormViewConfigurator {
 
 	let buildingMethod: ViewBuildingMethod = .manual

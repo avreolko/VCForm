@@ -6,9 +6,7 @@
 //  Copyright © 2018 Valentin Cherepyanko. All rights reserved.
 //
 
-import UIKit
 import VCExtensions
-import VCFormBuilder
 
 struct PaddingBuilder: IFormViewBuilder, IFormViewConfigurator {
 

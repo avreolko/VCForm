@@ -6,9 +6,6 @@
 //  Copyright © 2018 Valentin Cherepyanko. All rights reserved.
 //
 
-import UIKit
-import VCFormBuilder
-
 struct ButtonBuilder: IFormViewBuilder, IFormViewConfigurator {
 
 	let buildingMethod: ViewBuildingMethod = .manual

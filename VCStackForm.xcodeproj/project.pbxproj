@@ -23,10 +23,12 @@
 		A79FB64E21DDDAA00056795D /* DefaultFormElementType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79FB64D21DDDAA00056795D /* DefaultFormElementType.swift */; };
 		A79FB64F21DDE0260056795D /* TitleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79FB64B21DC77E30056795D /* TitleBuilder.swift */; };
 		A79FB65221DF44F70056795D /* AllBuildersTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79FB65121DF44F70056795D /* AllBuildersTestViewController.swift */; };
+		A7B40B9D22FEBB5500043DCC /* VCFormBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = A7B40B9822FEBB5500043DCC /* VCFormBuilder.h */; };
+		A7B40B9F22FEBB5500043DCC /* IFormBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B40B9B22FEBB5500043DCC /* IFormBuilder.swift */; };
+		A7B40BA022FEBB5500043DCC /* IViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B40B9C22FEBB5500043DCC /* IViewBuilder.swift */; };
 		A7D0B64421D9CC9600F8BD5B /* VCStackForm.h in Headers */ = {isa = PBXBuildFile; fileRef = A7D0B64221D9CC9600F8BD5B /* VCStackForm.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7D0B64B21D9CCA200F8BD5B /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = A7D0B64A21D9CCA200F8BD5B /* Cartfile */; };
 		A7D0B64F21D9CD2400F8BD5B /* VCExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D0B64D21D9CD2400F8BD5B /* VCExtensions.framework */; };
-		A7D0B65021D9CD2400F8BD5B /* VCFormBuilder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D0B64E21D9CD2400F8BD5B /* VCFormBuilder.framework */; };
 		A7D0B65521D9CDC400F8BD5B /* StackViewFormBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7D0B65321D9CDC400F8BD5B /* StackViewFormBuilder.swift */; };
 		A7D0B65621D9CDC400F8BD5B /* VCStackForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7D0B65421D9CDC400F8BD5B /* VCStackForm.swift */; };
 		A7D0B65E21D9D29500F8BD5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7D0B65D21D9D29500F8BD5B /* AppDelegate.swift */; };
@@ -85,6 +87,10 @@
 		A79FB64B21DC77E30056795D /* TitleBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleBuilder.swift; sourceTree = "<group>"; };
 		A79FB64D21DDDAA00056795D /* DefaultFormElementType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFormElementType.swift; sourceTree = "<group>"; };
 		A79FB65121DF44F70056795D /* AllBuildersTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllBuildersTestViewController.swift; sourceTree = "<group>"; };
+		A7B40B9822FEBB5500043DCC /* VCFormBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCFormBuilder.h; sourceTree = "<group>"; };
+		A7B40B9922FEBB5500043DCC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A7B40B9B22FEBB5500043DCC /* IFormBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFormBuilder.swift; sourceTree = "<group>"; };
+		A7B40B9C22FEBB5500043DCC /* IViewBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IViewBuilder.swift; sourceTree = "<group>"; };
 		A7D0B63F21D9CC9600F8BD5B /* VCStackForm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VCStackForm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7D0B64221D9CC9600F8BD5B /* VCStackForm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VCStackForm.h; sourceTree = "<group>"; };
 		A7D0B64321D9CC9600F8BD5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -108,7 +114,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A7D0B64F21D9CD2400F8BD5B /* VCExtensions.framework in Frameworks */,
-				A7D0B65021D9CD2400F8BD5B /* VCFormBuilder.framework in Frameworks */,
 				A7077C5F225E318700934EE2 /* VCWeakContainer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -160,10 +165,30 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
+		A7B40B9722FEBB5500043DCC /* VCFormBuilder */ = {
+			isa = PBXGroup;
+			children = (
+				A7B40B9822FEBB5500043DCC /* VCFormBuilder.h */,
+				A7B40B9922FEBB5500043DCC /* Info.plist */,
+				A7B40B9A22FEBB5500043DCC /* Base */,
+			);
+			path = VCFormBuilder;
+			sourceTree = "<group>";
+		};
+		A7B40B9A22FEBB5500043DCC /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				A7B40B9B22FEBB5500043DCC /* IFormBuilder.swift */,
+				A7B40B9C22FEBB5500043DCC /* IViewBuilder.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
 		A7D0B63521D9CC9600F8BD5B = {
 			isa = PBXGroup;
 			children = (
 				A7D0B64A21D9CCA200F8BD5B /* Cartfile */,
+				A7B40B9722FEBB5500043DCC /* VCFormBuilder */,
 				A7D0B64121D9CC9600F8BD5B /* VCStackForm */,
 				A7D0B65C21D9D29500F8BD5B /* VCStackFormExample */,
 				A7D0B64021D9CC9600F8BD5B /* Products */,
@@ -235,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A7D0B64421D9CC9600F8BD5B /* VCStackForm.h in Headers */,
+				A7B40B9D22FEBB5500043DCC /* VCFormBuilder.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,7 +375,6 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/VCExtensions.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/VCFormBuilder.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/VCWeakContainer.framework",
 			);
 			outputFileListPaths = (
@@ -368,6 +393,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A79FB64E21DDDAA00056795D /* DefaultFormElementType.swift in Sources */,
+				A7B40B9F22FEBB5500043DCC /* IFormBuilder.swift in Sources */,
 				A767A631225A01290046D5C6 /* DynamicHeightViewBuilder.swift in Sources */,
 				A767A62F2259FA550046D5C6 /* IDynamicHeight.swift in Sources */,
 				A767A633225A017C0046D5C6 /* DynamicHeightView.swift in Sources */,
@@ -378,6 +404,7 @@
 				A79FB63821DC71630056795D /* ActionButton.swift in Sources */,
 				A79FB64421DC71690056795D /* PaddingBuilder.swift in Sources */,
 				A79FB64321DC71690056795D /* LabelBuilder.swift in Sources */,
+				A7B40BA022FEBB5500043DCC /* IViewBuilder.swift in Sources */,
 				A79FB64021DC71690056795D /* TextFieldBuilder.swift in Sources */,
 				A79FB64221DC71690056795D /* ImageViewBuilder.swift in Sources */,
 				A79FB63921DC71630056795D /* ActionTextField.swift in Sources */,

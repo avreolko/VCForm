@@ -6,8 +6,6 @@
 //  Copyright © 2018 Valentin Cherepyanko. All rights reserved.
 //
 
-import UIKit
-import VCFormBuilder
 import VCExtensions
 
 struct TextFieldBuilder: IFormViewBuilder, IFormViewConfigurator {
