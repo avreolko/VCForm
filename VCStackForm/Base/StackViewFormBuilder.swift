@@ -6,13 +6,19 @@
 //  Copyright © 2018 Valentin Cherepyanko. All rights reserved.
 //
 
+public protocol IStackViewFormBuilderDelegate: AnyObject {
+	func provideBuilder(for: IFormElementType) -> IFormViewBuilder
+}
+
 public class StackViewFormBuilder: IFormBuilder {
 
 	public typealias ContainerView = UIStackView
 
-	private var models: [FormElementModel] = []
+	public weak var delegate: IStackViewFormBuilderDelegate?
 
 	public var elementHeightChangedHandler: ((CGFloat) -> Void)?
+
+	private var models: [FormElementModel] = []
 
 	public init() { }
 
@@ -25,11 +31,17 @@ public class StackViewFormBuilder: IFormBuilder {
 	@discardableResult
 	public func build(in stackView: ContainerView,
 					  viewHandler: (IFormElementType, UIView) -> Void) -> Self {
-		
+
+		guard let delegate = self.delegate else {
+			assertionFailure("Delegate should be set at this point.")
+			return self
+		}
+
 		stackView.subviews.forEach { $0.removeFromSuperview() }
 
 		self.models.forEach { (model) in
-			let builder = model.type.formViewBuilder
+
+			let builder = delegate.provideBuilder(for: model.type)
 
 			let view = builder.buildView(with: model.data)
 

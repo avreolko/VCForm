@@ -9,16 +9,15 @@
 import VCExtensions
 import VCWeakContainer
 
-protocol VCStackFormDelegate {
-	func provideBuilder(for: IFormElementType) -> IFormViewBuilder
-}
-
 public class VCStackForm: UIView {
+
+	public weak var builderDelegate: IStackViewFormBuilderDelegate?
 
 	private var scrollView = UIScrollView(frame: .zero)
 	private var stackView = UIStackView(frame: .zero)
 
 	private var config: VCStackFormConfiguration = .default
+
 	private var formBuilder = StackViewFormBuilder()
 
 	private var elements: [(IFormElementType, Weak<UIView>)] = []
@@ -94,10 +93,26 @@ public class VCStackForm: UIView {
 	}
 }
 
+extension VCStackForm: IStackViewFormBuilderDelegate {
+	public func provideBuilder(for elementType: IFormElementType) -> IFormViewBuilder {
+		if let defaultBuilder = self.defaultBuilder(for: elementType) {
+			return defaultBuilder
+		}
+
+		guard let builderDelegate = self.builderDelegate else {
+			fatalError("Not found default builder for this type. Builder delegate should be set in this case.")
+		}
+
+		return builderDelegate.provideBuilder(for: elementType)
+	}
+}
+
 // MARK: setup
 private extension VCStackForm {
 
 	func setup() {
+		self.formBuilder.delegate = self
+
 		self.setupStackView()
 		self.placeSubviews()
 
@@ -128,6 +143,23 @@ private extension VCStackForm {
 
 	func setupStackView() {
 		self.stackView.axis = .vertical
+	}
+
+	func defaultBuilder(for elementType: IFormElementType) -> IFormViewBuilder? {
+
+		guard let defaultType = elementType as? DefaultFormElementType else {
+			return nil
+		}
+
+		switch defaultType {
+		case .normalText: return LabelBuilder()
+		case .image: return ImageViewBuilder()
+		case .button: return ButtonBuilder()
+		case .field: return TextFieldBuilder()
+		case .padding: return PaddingBuilder()
+		case .title: return TitleBuilder()
+		case .dynamicHeight: return DynamicHeightViewBuilder()
+		}
 	}
 }
 

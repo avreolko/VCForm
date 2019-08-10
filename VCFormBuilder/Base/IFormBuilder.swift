@@ -10,7 +10,6 @@ import UIKit
 
 public protocol IFormElementType {
 	var id: String { get }
-	var formViewBuilder: IFormViewBuilder { get }
 }
 
 public typealias FormElementModel = (type: IFormElementType, data: Any)
