@@ -10,13 +10,14 @@ import VCExtensions
 
 struct PaddingBuilder: IFormViewBuilder, IFormViewConfigurator {
 
-	let buildingMethod: ViewBuildingMethod = .manual
-
-	typealias ViewData = NSNumber
+	typealias ViewConfiguration = CGFloat
 	typealias View = UIView
 
-	func configure(_ view: View, with data: ViewData) {
-		view.setConstraint(height: CGFloat(data.floatValue))
+	let configuration: ViewConfiguration
+	let buildingMethod: ViewBuildingMethod = .manual
+
+	func configure(_ view: View) {
+		view.setConstraint(height: self.configuration)
 		view.setContentCompressionResistancePriority(.required, for: .vertical)
 	}
 }

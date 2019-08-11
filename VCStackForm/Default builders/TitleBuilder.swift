@@ -7,14 +7,14 @@
 //
 
 struct TitleBuilder: IFormViewBuilder, IFormViewConfigurator {
-
-	let buildingMethod: ViewBuildingMethod = .manual
-
-	typealias ViewData = String
+	typealias ViewConfiguration = String
 	typealias View = UILabel
 
-	func configure(_ view: View, with data: ViewData) {
-		view.text = data
+	let configuration: ViewConfiguration
+	let buildingMethod: ViewBuildingMethod = .manual
+
+	func configure(_ view: View) {
+		view.text = self.configuration
 
 		view.font = UIFont.boldSystemFont(ofSize: 18)
 		view.lineBreakMode = .byWordWrapping

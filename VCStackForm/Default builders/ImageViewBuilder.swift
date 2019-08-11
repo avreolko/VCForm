@@ -10,13 +10,17 @@ import VCExtensions
 
 struct ImageViewBuilder: IFormViewBuilder, IFormViewConfigurator {
 
-	let buildingMethod: ViewBuildingMethod = .manual
-
-	typealias ViewData = (image: UIImage, size: CGFloat)
+	typealias ViewConfiguration = (image: UIImage, size: CGFloat)
 	typealias View = UIImageView
 
-	func configure(_ view: View, with data: ViewData) {
-		view.image = data.image.resize(with: CGSize(width: CGFloat.greatestFiniteMagnitude, height: data.size))
+	let configuration: ViewConfiguration
+	let buildingMethod: ViewBuildingMethod = .manual
+
+	func configure(_ view: View) {
+		let imageSize = CGSize(width: CGFloat.greatestFiniteMagnitude,
+							   height: self.configuration.size)
+
+		view.image = self.configuration.image.resize(with: imageSize)
 		view.contentMode = .scaleAspectFit
 		view.clipsToBounds = true
 		view.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)

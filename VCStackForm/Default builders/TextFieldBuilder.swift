@@ -10,15 +10,16 @@ import VCExtensions
 
 struct TextFieldBuilder: IFormViewBuilder, IFormViewConfigurator {
 
-	let buildingMethod: ViewBuildingMethod = .manual
-
-	typealias ViewData = () -> Void
+	typealias ViewConfiguration = () -> Void
 	typealias View = ActionTextField
 
-	func configure(_ view: View, with data: @escaping ViewData) {
+	let configuration: ViewConfiguration
+	let buildingMethod: ViewBuildingMethod = .manual
+
+	func configure(_ view: View) {
 		view.changeDelay = 0.01
 		view.borderStyle = .roundedRect
 		view.setConstraint(height: 40)
-		view.changeHandler = data
+		view.changeHandler = self.configuration
 	}
 }

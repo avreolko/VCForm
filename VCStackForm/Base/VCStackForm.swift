@@ -32,16 +32,21 @@ public class VCStackForm: UIView {
 		self.setup()
 	}
 
-	public func fill(with models: [FormElementModel]) {
+	public func fill(with elements: [IFormElementType]) {
 		self.reset()
 		self.formBuilder.reset()
 
-		models.forEach { (model) in
-			self.formBuilder.append(model)
+		elements.forEach { (element) in
+			self.formBuilder.append(element)
 		}
 
+		let animationDuration = self.config.heightAnimationDuration
 		self.formBuilder.build(in: self.stackView) { [weak self] (type, view) in
 			self?.elements.append((type, Weak(view)))
+
+			(view as? IDynamicHeight)?.heightChangedHandler = { _ in
+				UIView.animate(withDuration: animationDuration, animations: { self?.layoutIfNeeded() })
+			}
 		}
 	}
 
@@ -69,9 +74,9 @@ public class VCStackForm: UIView {
 
 	public func update(_ elementType: IFormElementType, with data: Any) {
 		// todo: добавить ассерты на случай, когда элемент с таким id есть, но не является IDataView
-		self.elements
-			.filter { $0.0.id == elementType.id }
-			.forEach { ($0.1.object as? IDataView)?.update(with: data) }
+		self.elements.forEach {
+			($0.1.object as? IDataView)?.update(with: data)
+		}
 	}
 
 	public func hide(_ elementType: IFormElementType) {
@@ -94,16 +99,17 @@ public class VCStackForm: UIView {
 }
 
 extension VCStackForm: IStackViewFormBuilderDelegate {
-	public func provideBuilder(for elementType: IFormElementType) -> IFormViewBuilder {
+	public func provideBuilder(for elementType: IFormElementType) -> IFormViewBuilder? {
+		if let builder = self.builderDelegate?.provideBuilder(for: elementType) {
+			return builder
+		}
+
 		if let defaultBuilder = self.defaultBuilder(for: elementType) {
 			return defaultBuilder
 		}
 
-		guard let builderDelegate = self.builderDelegate else {
-			fatalError("Not found default builder for this type. Builder delegate should be set in this case.")
-		}
-
-		return builderDelegate.provideBuilder(for: elementType)
+		assertionFailure("Builder shoul be present at this point.")
+		return nil
 	}
 }
 
@@ -118,13 +124,6 @@ private extension VCStackForm {
 
 		self.configure(with: VCStackFormConfiguration.default)
 		self.setupConstraints()
-
-		let animationDuration = self.config.heightAnimationDuration
-		self.formBuilder.elementHeightChangedHandler = { _ in
-			UIView.animate(withDuration: animationDuration, animations: { [weak self] in
-				self?.layoutIfNeeded()
-			})
-		}
 	}
 
 	func placeSubviews() {
@@ -146,19 +145,18 @@ private extension VCStackForm {
 	}
 
 	func defaultBuilder(for elementType: IFormElementType) -> IFormViewBuilder? {
-
 		guard let defaultType = elementType as? DefaultFormElementType else {
 			return nil
 		}
 
 		switch defaultType {
-		case .normalText: return LabelBuilder()
-		case .image: return ImageViewBuilder()
-		case .button: return ButtonBuilder()
-		case .field: return TextFieldBuilder()
-		case .padding: return PaddingBuilder()
-		case .title: return TitleBuilder()
-		case .dynamicHeight: return DynamicHeightViewBuilder()
+		case .normalText(let text): return LabelBuilder(configuration: text)
+		case .image(let image, let height): return ImageViewBuilder(configuration: (image, height))
+		case .button(let title, let tapHandler): return ButtonBuilder(configuration: (title, tapHandler))
+		case .field(let changeHandler): return TextFieldBuilder(configuration: changeHandler)
+		case .padding(let value): return PaddingBuilder(configuration: value)
+		case .title(let value): return TitleBuilder(configuration: value)
+		case .dynamicHeight(let collapsedHeight, let expandedHeight): return DynamicHeightViewBuilder(configuration: (collapsedHeight, expandedHeight))
 		}
 	}
 }

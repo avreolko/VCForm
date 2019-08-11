@@ -8,16 +8,17 @@
 
 struct ButtonBuilder: IFormViewBuilder, IFormViewConfigurator {
 
-	let buildingMethod: ViewBuildingMethod = .manual
-
-	typealias ViewData = (title: String, changeHandler: () -> Void)
+	typealias ViewConfiguration = (title: String, changeHandler: () -> Void)
 	typealias View = ActionButton
 
-	func configure(_ view: View, with data: ViewData) {
-		view.setTitle(data.title, for: .normal)
+	let configuration: ViewConfiguration
+	let buildingMethod: ViewBuildingMethod = .manual
+
+	func configure(_ view: View) {
+		view.setTitle(self.configuration.title, for: .normal)
 		view.setTitleColor(.black, for: .normal)
 		view.backgroundColor = .lightGray
 		view.setContentCompressionResistancePriority(.required, for: .vertical)
-		view.tapHandler = data.changeHandler
+		view.tapHandler = self.configuration.changeHandler
 	}
 }

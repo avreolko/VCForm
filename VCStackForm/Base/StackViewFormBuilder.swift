@@ -7,7 +7,7 @@
 //
 
 public protocol IStackViewFormBuilderDelegate: AnyObject {
-	func provideBuilder(for: IFormElementType) -> IFormViewBuilder
+	func provideBuilder(for: IFormElementType) -> IFormViewBuilder?
 }
 
 public class StackViewFormBuilder: IFormBuilder {
@@ -18,13 +18,13 @@ public class StackViewFormBuilder: IFormBuilder {
 
 	public var elementHeightChangedHandler: ((CGFloat) -> Void)?
 
-	private var models: [FormElementModel] = []
+	private var elements: [IFormElementType] = []
 
 	public init() { }
 
 	@discardableResult
-	public func append(_ model: FormElementModel) -> Self {
-		self.models.append(model)
+	public func append(_ element: IFormElementType) -> Self {
+		self.elements.append(element)
 		return self
 	}
 
@@ -39,20 +39,13 @@ public class StackViewFormBuilder: IFormBuilder {
 
 		stackView.subviews.forEach { $0.removeFromSuperview() }
 
-		self.models.forEach { (model) in
+		self.elements.forEach { element in
 
-			let builder = delegate.provideBuilder(for: model.type)
+			guard let builder = delegate.provideBuilder(for: element) else { return }
 
-			let view = builder.buildView(with: model.data)
-
+			let view = builder.build()
 			stackView.addArrangedSubview(view)
-
-			(view as? IDynamicHeight).map { [weak self] in
-				$0.heightChangedHandler = self?.elementHeightChangedHandler
-			}
-
-			viewHandler(model.type, view)
-
+			viewHandler(element, view)
 			view.sizeToFit()
 		}
 
@@ -61,7 +54,7 @@ public class StackViewFormBuilder: IFormBuilder {
 
 	@discardableResult
 	public func reset() -> Self {
-		self.models.removeAll()
+		self.elements.removeAll()
 		return self
 	}
 }

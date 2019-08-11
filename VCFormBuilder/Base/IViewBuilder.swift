@@ -12,18 +12,18 @@ public enum ViewBuildingMethod {
 	case xib, manual
 }
 
-// So, basically, this is two protocols in one
-// I needed second one without generic constraints for the form builder
 public protocol IFormViewBuilder {
 	var buildingMethod: ViewBuildingMethod { get }
-	func buildView(with data: Any?) -> UIView
+	func build() -> UIView
 }
 
-public protocol IFormViewConfigurator: Hashable {
-	associatedtype ViewData: Any
+public protocol IFormViewConfigurator {
+	associatedtype ViewConfiguration: Any
 	associatedtype View: UIView
 
-	func configure(_ view: View, with data: ViewData)
+	var configuration: ViewConfiguration { get }
+
+	func configure(_ view: View)
 }
 
 // MARK: Default implementations
@@ -45,16 +45,9 @@ public extension IFormViewBuilder where Self: IFormViewConfigurator {
 		return view ?? View(frame: .zero)
 	}
 
-	func buildView(with data: Any?) -> UIView {
-
+	func build() -> UIView {
 		let view: View = self.loadView()
-
-		if let unpackedData = data as? ViewData {
-			self.configure(view, with: unpackedData)
-		} else {
-			assertionFailure("Passed data do not match to the specified ViewData")
-		}
-
+		self.configure(view)
 		return view
 	}
 }

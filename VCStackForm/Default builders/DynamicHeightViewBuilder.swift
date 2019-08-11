@@ -7,16 +7,16 @@
 //
 
 struct DynamicHeightViewBuilder: IFormViewBuilder, IFormViewConfigurator {
-
-	let buildingMethod: ViewBuildingMethod = .xib
-
-	typealias ViewData = (collapsedHeight: CGFloat, expandedHeight: CGFloat)
+	typealias ViewConfiguration = (collapsedHeight: CGFloat, expandedHeight: CGFloat)
 	typealias View = DynamicHeightView
 
-	func configure(_ view: View, with data: ViewData) {
+	let configuration: ViewConfiguration
+	let buildingMethod: ViewBuildingMethod = .xib
+
+	func configure(_ view: View) {
 		view.setContentCompressionResistancePriority(.required, for: .vertical)
 
-		view.collapsedHeight = data.collapsedHeight
-		view.expandedHeight = data.expandedHeight
+		view.collapsedHeight = self.configuration.collapsedHeight
+		view.expandedHeight = self.configuration.expandedHeight
 	}
 }
