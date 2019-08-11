@@ -7,6 +7,7 @@
 //
 
 import VCExtensions
+import VCStackForm
 
 struct TextFieldBuilder: IFormViewBuilder, IFormViewConfigurator {
 

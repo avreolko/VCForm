@@ -6,6 +6,8 @@
 //  Copyright © 2018 Valentin Cherepyanko. All rights reserved.
 //
 
+import VCStackForm
+
 struct LabelBuilder: IFormViewBuilder, IFormViewConfigurator {
 
 	typealias ViewConfiguration = String

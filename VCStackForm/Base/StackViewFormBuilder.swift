@@ -6,7 +6,7 @@
 //  Copyright © 2018 Valentin Cherepyanko. All rights reserved.
 //
 
-public protocol IStackViewFormBuilderDelegate: AnyObject {
+public protocol IBuildersProvider: AnyObject {
 	func provideBuilder(for: IFormElementType) -> IFormViewBuilder?
 }
 
@@ -14,7 +14,7 @@ public class StackViewFormBuilder: IFormBuilder {
 
 	public typealias ContainerView = UIStackView
 
-	public weak var delegate: IStackViewFormBuilderDelegate?
+	public weak var buildersProvider: IBuildersProvider?
 
 	public var elementHeightChangedHandler: ((CGFloat) -> Void)?
 
@@ -32,7 +32,7 @@ public class StackViewFormBuilder: IFormBuilder {
 	public func build(in stackView: ContainerView,
 					  viewHandler: (IFormElementType, UIView) -> Void) -> Self {
 
-		guard let delegate = self.delegate else {
+		guard let delegate = self.buildersProvider else {
 			assertionFailure("Delegate should be set at this point.")
 			return self
 		}

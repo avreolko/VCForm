@@ -12,6 +12,8 @@ class ScrollTestViewController: UIViewController {
 	
 	@IBOutlet weak var stackForm: VCStackForm!
 
+	private let buildersProvider = BuildersProvider()
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		self.configureForm()
@@ -25,6 +27,7 @@ private extension ScrollTestViewController {
 		let insets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
 		let config = VCStackFormConfiguration(showScrollIndicator: false, contentInsets: insets)
 		self.stackForm.configure(with: config)
+		self.stackForm.buildersProvider = self.buildersProvider
 	}
 
 	func fillForm() {

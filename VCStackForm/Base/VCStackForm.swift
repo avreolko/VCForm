@@ -11,7 +11,11 @@ import VCWeakContainer
 
 public class VCStackForm: UIView {
 
-	public weak var builderDelegate: IStackViewFormBuilderDelegate?
+	public weak var buildersProvider: IBuildersProvider? {
+		didSet {
+			self.formBuilder.buildersProvider = self.buildersProvider
+		}
+	}
 
 	private var scrollView = UIScrollView(frame: .zero)
 	private var stackView = UIStackView(frame: .zero)
@@ -98,27 +102,10 @@ public class VCStackForm: UIView {
 	}
 }
 
-extension VCStackForm: IStackViewFormBuilderDelegate {
-	public func provideBuilder(for elementType: IFormElementType) -> IFormViewBuilder? {
-		if let builder = self.builderDelegate?.provideBuilder(for: elementType) {
-			return builder
-		}
-
-		if let defaultBuilder = self.defaultBuilder(for: elementType) {
-			return defaultBuilder
-		}
-
-		assertionFailure("Builder should be present at this point.")
-		return nil
-	}
-}
-
 // MARK: setup
 private extension VCStackForm {
 
 	func setup() {
-		self.formBuilder.delegate = self
-
 		self.setupStackView()
 		self.placeSubviews()
 
@@ -142,22 +129,6 @@ private extension VCStackForm {
 
 	func setupStackView() {
 		self.stackView.axis = .vertical
-	}
-
-	func defaultBuilder(for elementType: IFormElementType) -> IFormViewBuilder? {
-		guard let defaultType = elementType as? DefaultFormElementType else {
-			return nil
-		}
-
-		switch defaultType {
-		case .normalText(let text): return LabelBuilder(configuration: text, viewHandler: nil)
-		case .image(let image, let height): return ImageViewBuilder(configuration: (image, height), viewHandler: nil)
-		case .button(let title, let tapHandler): return ButtonBuilder(configuration: (title, tapHandler), viewHandler: nil)
-		case .field(let changeHandler): return TextFieldBuilder(configuration: changeHandler, viewHandler: nil)
-		case .padding(let value): return PaddingBuilder(configuration: value, viewHandler: nil)
-		case .title(let value): return TitleBuilder(configuration: value, viewHandler: nil)
-		case .dynamicHeight(let collapsedHeight, let expandedHeight): return DynamicHeightViewBuilder(configuration: (collapsedHeight, expandedHeight), viewHandler: nil)
-		}
 	}
 }
 

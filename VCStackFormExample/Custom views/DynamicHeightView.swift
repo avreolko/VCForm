@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import VCStackForm
 
 public class DynamicHeightView: UIView, IDynamicHeight {
 	@IBOutlet weak var height: NSLayoutConstraint!

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import CoreGraphics
+import VCStackForm
 
 public enum DefaultFormElementType {
 	case normalText(String)

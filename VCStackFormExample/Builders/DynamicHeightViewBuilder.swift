@@ -6,6 +6,8 @@
 //  Copyright © 2019 Valentin Cherepyanko. All rights reserved.
 //
 
+import VCStackForm
+
 struct DynamicHeightViewBuilder: IFormViewBuilder, IFormViewConfigurator {
 	typealias ViewConfiguration = (collapsedHeight: CGFloat, expandedHeight: CGFloat)
 	typealias View = DynamicHeightView

@@ -6,6 +6,8 @@
 //  Copyright © 2019 Valentin Cherepyanko. All rights reserved.
 //
 
+import VCStackForm
+
 struct TitleBuilder: IFormViewBuilder, IFormViewConfigurator {
 	typealias ViewConfiguration = String
 	typealias View = UILabel

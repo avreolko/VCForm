@@ -7,6 +7,7 @@
 //
 
 import VCExtensions
+import VCStackForm
 
 struct PaddingBuilder: IFormViewBuilder, IFormViewConfigurator {
 	typealias ViewConfiguration = CGFloat
