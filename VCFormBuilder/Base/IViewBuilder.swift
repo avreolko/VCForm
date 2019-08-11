@@ -22,6 +22,7 @@ public protocol IFormViewConfigurator {
 	associatedtype View: UIView
 
 	var configuration: ViewConfiguration { get }
+	var viewHandler: ((View) -> Void)? { get set }
 
 	func configure(_ view: View)
 }
@@ -48,6 +49,7 @@ public extension IFormViewBuilder where Self: IFormViewConfigurator {
 	func build() -> UIView {
 		let view: View = self.loadView()
 		self.configure(view)
+		self.viewHandler?(view)
 		return view
 	}
 }

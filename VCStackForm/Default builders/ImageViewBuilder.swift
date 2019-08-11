@@ -15,6 +15,7 @@ struct ImageViewBuilder: IFormViewBuilder, IFormViewConfigurator {
 
 	let configuration: ViewConfiguration
 	let buildingMethod: ViewBuildingMethod = .manual
+	var viewHandler: ((View) -> Void)?
 
 	func configure(_ view: View) {
 		let imageSize = CGSize(width: CGFloat.greatestFiniteMagnitude,

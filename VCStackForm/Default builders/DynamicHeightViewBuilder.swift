@@ -12,6 +12,7 @@ struct DynamicHeightViewBuilder: IFormViewBuilder, IFormViewConfigurator {
 
 	let configuration: ViewConfiguration
 	let buildingMethod: ViewBuildingMethod = .xib
+	var viewHandler: ((View) -> Void)?
 
 	func configure(_ view: View) {
 		view.setContentCompressionResistancePriority(.required, for: .vertical)
