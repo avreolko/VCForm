@@ -8,17 +8,22 @@
 
 import VCStackForm
 
+struct LabelConfiguration: IViewConfiguration {
+	let text: String
+	static let `default` = LabelConfiguration(text: "Default text")
+}
+
 struct LabelBuilder: IFormViewBuilder, IFormViewConfigurator {
 
-	typealias ViewConfiguration = String
+	typealias ViewConfiguration = LabelConfiguration
 	typealias View = UILabel
 
-	let configuration: ViewConfiguration
 	let buildingMethod: ViewBuildingMethod = .manual
+	var viewConfiguration: ViewConfiguration = .default
 	var viewHandler: ((View) -> Void)?
 
 	func configure(_ view: View) {
-		view.text = self.configuration
+		view.text = self.viewConfiguration.text
 
 		view.font = UIFont.systemFont(ofSize: 14)
 		view.lineBreakMode = .byWordWrapping

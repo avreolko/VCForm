@@ -8,18 +8,27 @@
 
 import VCStackForm
 
+struct DynamicHeightViewConfiguration: IViewConfiguration {
+
+	let collapsedHeight: CGFloat
+	let expandedHeight: CGFloat
+
+	static var `default` = DynamicHeightViewConfiguration(collapsedHeight: 50, expandedHeight: 100)
+}
+
 struct DynamicHeightViewBuilder: IFormViewBuilder, IFormViewConfigurator {
-	typealias ViewConfiguration = (collapsedHeight: CGFloat, expandedHeight: CGFloat)
+
+	typealias ViewConfiguration = DynamicHeightViewConfiguration
 	typealias View = DynamicHeightView
 
-	let configuration: ViewConfiguration
 	let buildingMethod: ViewBuildingMethod = .xib
+	var viewConfiguration: DynamicHeightViewConfiguration = .default
 	var viewHandler: ((View) -> Void)?
 
 	func configure(_ view: View) {
 		view.setContentCompressionResistancePriority(.required, for: .vertical)
 
-		view.collapsedHeight = self.configuration.collapsedHeight
-		view.expandedHeight = self.configuration.expandedHeight
+		view.collapsedHeight = self.viewConfiguration.collapsedHeight
+		view.expandedHeight = self.viewConfiguration.expandedHeight
 	}
 }

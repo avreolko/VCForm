@@ -16,13 +16,11 @@ final class BuildersProvider: IBuildersProvider {
 		}
 
 		switch defaultType {
-		case .normalText(let text): return LabelBuilder(configuration: text, viewHandler: nil)
-		case .image(let image, let height): return ImageViewBuilder(configuration: (image, height), viewHandler: nil)
-		case .button(let title, let tapHandler): return ButtonBuilder(configuration: (title, tapHandler), viewHandler: nil)
-		case .field(let changeHandler): return TextFieldBuilder(configuration: changeHandler, viewHandler: nil)
-		case .padding(let value): return PaddingBuilder(configuration: value, viewHandler: nil)
-		case .title(let value): return TitleBuilder(configuration: value, viewHandler: nil)
-		case .dynamicHeight(let collapsedHeight, let expandedHeight): return DynamicHeightViewBuilder(configuration: (collapsedHeight, expandedHeight), viewHandler: nil)
+		case .title(let text): return TitleBuilder(viewConfiguration: TitleViewConfiguration(text: text), viewHandler: nil)
+		case .normalText(let text): return LabelBuilder(viewConfiguration: LabelConfiguration(text: text), viewHandler: nil)
+		case .image(let image): return ImageViewBuilder(viewConfiguration: ImageViewConfiguration(image: image, height: 200), viewHandler: nil)
+		case .padding: return PaddingBuilder(viewConfiguration: .default, viewHandler: nil)
+		case .dynamicHeight: return DynamicHeightViewBuilder(viewConfiguration: .default, viewHandler: nil)
 		}
 	}
 }

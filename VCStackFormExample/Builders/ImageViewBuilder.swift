@@ -9,20 +9,27 @@
 import VCExtensions
 import VCStackForm
 
+struct ImageViewConfiguration: IViewConfiguration {
+	let image: UIImage
+	let height: CGFloat
+
+	static let `default` = ImageViewConfiguration(image: #imageLiteral(resourceName: "image.jpg"), height: 200)
+}
+
 struct ImageViewBuilder: IFormViewBuilder, IFormViewConfigurator {
 
-	typealias ViewConfiguration = (image: UIImage, size: CGFloat)
+	typealias ViewConfiguration = ImageViewConfiguration
 	typealias View = UIImageView
 
-	let configuration: ViewConfiguration
 	let buildingMethod: ViewBuildingMethod = .manual
+	var viewConfiguration: ViewConfiguration = .default
 	var viewHandler: ((View) -> Void)?
 
 	func configure(_ view: View) {
 		let imageSize = CGSize(width: CGFloat.greatestFiniteMagnitude,
-							   height: self.configuration.size)
+							   height: self.viewConfiguration.height)
 
-		view.image = self.configuration.image.resize(with: imageSize)
+		view.image = self.viewConfiguration.image.resize(with: imageSize)
 		view.contentMode = .scaleAspectFit
 		view.clipsToBounds = true
 		view.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)

@@ -8,6 +8,20 @@
 
 import UIKit
 
+public protocol IViewConfiguration {
+	static var `default`: Self { get }
+}
+
+public protocol IFormViewConfigurator {
+	associatedtype ViewConfiguration: IViewConfiguration
+	associatedtype View: UIView
+
+	var viewConfiguration: ViewConfiguration { get set }
+	var viewHandler: ((View) -> Void)? { get set }
+
+	func configure(_ view: View)
+}
+
 public enum ViewBuildingMethod {
 	case xib, manual
 }
@@ -15,16 +29,6 @@ public enum ViewBuildingMethod {
 public protocol IFormViewBuilder {
 	var buildingMethod: ViewBuildingMethod { get }
 	func build() -> UIView
-}
-
-public protocol IFormViewConfigurator {
-	associatedtype ViewConfiguration: Any
-	associatedtype View: UIView
-
-	var configuration: ViewConfiguration { get }
-	var viewHandler: ((View) -> Void)? { get set }
-
-	func configure(_ view: View)
 }
 
 // MARK: Default implementations
@@ -52,5 +56,7 @@ public extension IFormViewBuilder where Self: IFormViewConfigurator {
 		self.viewHandler?(view)
 		return view
 	}
+
+	func configure(_ view: View) { }
 }
 

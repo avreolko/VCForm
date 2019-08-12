@@ -8,16 +8,22 @@
 
 import VCStackForm
 
+struct TitleViewConfiguration: IViewConfiguration {
+	let text: String
+	static let `default` = TitleViewConfiguration(text: "Default title text")
+}
+
 struct TitleBuilder: IFormViewBuilder, IFormViewConfigurator {
-	typealias ViewConfiguration = String
+
+	typealias ViewConfiguration = TitleViewConfiguration
 	typealias View = UILabel
 
-	let configuration: ViewConfiguration
 	let buildingMethod: ViewBuildingMethod = .manual
+	var viewConfiguration: TitleViewConfiguration = .default
 	var viewHandler: ((View) -> Void)?
 
 	func configure(_ view: View) {
-		view.text = self.configuration
+		view.text = self.viewConfiguration.text
 
 		view.font = UIFont.boldSystemFont(ofSize: 18)
 		view.lineBreakMode = .byWordWrapping

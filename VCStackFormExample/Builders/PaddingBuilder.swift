@@ -9,16 +9,21 @@
 import VCExtensions
 import VCStackForm
 
+struct PaddingConfiguration: IViewConfiguration {
+	let height: CGFloat
+	static let `default` = PaddingConfiguration(height: 8)
+}
+
 struct PaddingBuilder: IFormViewBuilder, IFormViewConfigurator {
-	typealias ViewConfiguration = CGFloat
+	typealias ViewConfiguration = PaddingConfiguration
 	typealias View = UIView
 
-	let configuration: ViewConfiguration
 	let buildingMethod: ViewBuildingMethod = .manual
+	var viewConfiguration: ViewConfiguration = .default
 	var viewHandler: ((View) -> Void)?
 
 	func configure(_ view: View) {
-		view.setConstraint(height: self.configuration)
+		view.setConstraint(height: self.viewConfiguration.height)
 		view.setContentCompressionResistancePriority(.required, for: .vertical)
 	}
 }

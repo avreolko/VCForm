@@ -10,25 +10,21 @@ import UIKit
 import VCStackForm
 
 public enum DefaultFormElementType {
-	case normalText(String)
-	case image(UIImage, CGFloat)
-	case button(String, () -> Void)
-	case field(() -> Void)
-	case padding(CGFloat)
 	case title(String)
-	case dynamicHeight(CGFloat, CGFloat)
+	case normalText(String)
+	case image(UIImage)
+	case padding
+	case dynamicHeight
 }
 
 extension DefaultFormElementType: IFormElementType {
 
 	public var id: String {
 		switch self {
-		case .normalText: return "normalText"
+		case .normalText(let text): return "normalText_\(text)"
 		case .image: return "image"
-		case .button: return "button"
-		case .field: return "field"
 		case .padding: return "padding"
-		case .title: return "title"
+		case .title(let text): return "title_\(text)"
 		case .dynamicHeight: return "normalText"
 		}
 	}

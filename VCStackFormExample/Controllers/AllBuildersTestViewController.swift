@@ -34,31 +34,20 @@ private extension AllBuildersTestViewController {
 	func fillForm() {
 		var models: [DefaultFormElementType] = []
 
-		models.append(.dynamicHeight(50, 100))
+		models.append(.dynamicHeight)
 
 		models.append(.title("Normal text test"))
 		models.append(.normalText("This is just normal text. It uses multiline UILabel and expands with it contents. It's height also taken into account when UIScrollView tries to calculate content size."))
 
 
-		models.append(.padding(20))
+		models.append(.padding)
 		models.append(.title("Button test"))
 		models.append(.normalText("For button was written custom class with possibility to assign tap handler, that executes every time when button is tapped. Try to tap on it and see in console for some events."))
 
-		var hidden = false
-		models.append(.button("Hide or show image", {
-			hidden = !hidden
-			self.stackForm.hide(hidden, type: DefaultFormElementType.image(#imageLiteral(resourceName: "image"), 200))
-		}))
-
-		models.append(.padding(20))
-		models.append(.title("Text field test"))
-		models.append(.normalText("Same as button, it uses custom class with change handler."))
-		models.append(.field({ print("Text field changed value") }))
-
-		models.append(.padding(20))
+		models.append(.padding)
 		models.append(.title("Image test"))
 		models.append(.normalText("First parameter in data is image itself, second one is the height of UIImageView. If you pass just '200', compiler will think that it's Int, not CGFloat. You should be careful about types of passed data. Or your view will not be configured."))
-		models.append(.image(#imageLiteral(resourceName: "image"), 200))
+		models.append(.image(#imageLiteral(resourceName: "image")))
 
 		self.stackForm.fill(with: models)
 	}
