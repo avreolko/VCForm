@@ -20,7 +20,7 @@ final class BuildersProvider: IBuildersProvider {
 		case .normalText(let text): return LabelBuilder(viewConfiguration: LabelConfiguration(text: text))
 		case .image(let image): return ImageViewBuilder(viewConfiguration: ImageViewConfiguration(image: image, height: 200), viewHandler: nil)
 		case .padding: return PaddingBuilder()
-		case .dynamicHeight: return DynamicHeightViewBuilder(viewConfiguration: .default)
+		case .dynamicHeight: return DynamicHeightViewBuilder()
 		}
 	}
 }

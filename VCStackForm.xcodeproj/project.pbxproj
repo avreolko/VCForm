@@ -168,11 +168,11 @@
 		A7B40BA1230060FB00043DCC /* Builders */ = {
 			isa = PBXGroup;
 			children = (
+				A7B40BA62300613200043DCC /* TitleBuilder.swift */,
+				A7B40BA52300613200043DCC /* LabelBuilder.swift */,
 				A7B40BA72300613200043DCC /* DynamicHeightViewBuilder.swift */,
 				A7B40BA22300613200043DCC /* ImageViewBuilder.swift */,
-				A7B40BA52300613200043DCC /* LabelBuilder.swift */,
 				A7B40BA42300613200043DCC /* PaddingBuilder.swift */,
-				A7B40BA62300613200043DCC /* TitleBuilder.swift */,
 			);
 			path = Builders;
 			sourceTree = "<group>";
