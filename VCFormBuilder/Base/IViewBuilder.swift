@@ -22,6 +22,18 @@ public protocol IFormViewConfigurator {
 	func configure(_ view: View)
 }
 
+public extension IFormViewConfigurator {
+	init() {
+		self.init(viewConfiguration: .default, viewHandler: nil)
+	}
+
+	init(viewConfiguration: ViewConfiguration = .default, viewHandler: ((View) -> Void)? = nil) {
+		self.init()
+		self.viewConfiguration = viewConfiguration
+		self.viewHandler = viewHandler
+	}
+}
+
 public enum ViewBuildingMethod {
 	case xib, manual
 }
