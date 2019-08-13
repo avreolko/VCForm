@@ -9,7 +9,7 @@
 import UIKit
 
 public protocol IBuildersProvider: AnyObject {
-	func provideBuilder(for: IFormElementType) -> IFormViewBuilder?
+	func provideBuilder(for element: IFormElement) -> IFormViewBuilder?
 }
 
 public class StackViewFormBuilder: IFormBuilder {
@@ -20,19 +20,19 @@ public class StackViewFormBuilder: IFormBuilder {
 
 	public var elementHeightChangedHandler: ((CGFloat) -> Void)?
 
-	private var elements: [IFormElementType] = []
+	private var elements: [IFormElement] = []
 
 	public init() { }
 
 	@discardableResult
-	public func append(_ element: IFormElementType) -> Self {
+	public func append(_ element: IFormElement) -> Self {
 		self.elements.append(element)
 		return self
 	}
 
 	@discardableResult
 	public func build(in stackView: ContainerView,
-					  viewHandler: (IFormElementType, UIView) -> Void) -> Self {
+					  viewHandler: (IFormElement, UIView) -> Void) -> Self {
 
 		guard let delegate = self.buildersProvider else {
 			assertionFailure("Delegate should be set at this point.")

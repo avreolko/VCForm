@@ -24,7 +24,7 @@ public class VCForm: UIView {
 
 	private var formBuilder = StackViewFormBuilder()
 
-	private var elements: [(IFormElementType, Weak<UIView>)] = []
+	private var elements: [(IFormElement, Weak<UIView>)] = []
 
 	public override init(frame: CGRect) {
 		super.init(frame: frame)
@@ -36,7 +36,7 @@ public class VCForm: UIView {
 		self.setup()
 	}
 
-	public func fill(with elements: [IFormElementType]) {
+	public func fill(with elements: [IFormElement]) {
 		self.reset()
 		self.formBuilder.reset()
 
@@ -76,22 +76,22 @@ public class VCForm: UIView {
 		}
 	}
 
-	public func update(_ elementType: IFormElementType, with data: Any) {
+	public func update(_ element: IFormElement, with data: Any) {
 		// todo: добавить ассерты на случай, когда элемент с таким id есть, но не является IDataView
 		self.elements.forEach {
 			($0.1.object as? IDataView)?.update(with: data)
 		}
 	}
 
-	public func hide(_ elementType: IFormElementType) {
-		self.hide(true, type: elementType)
+	public func hide(_ element: IFormElement) {
+		self.hide(true, type: element)
 	}
 
-	public func show(_ elementType: IFormElementType) {
-		self.hide(false, type: elementType)
+	public func show(_ element: IFormElement) {
+		self.hide(false, type: element)
 	}
 
-	public func hide(_ hide: Bool, type: IFormElementType) {
+	public func hide(_ hide: Bool, type: IFormElement) {
 		self.elements
 			.filter { $0.0.id == type.id }
 			.forEach { $0.1.object?.isHidden = hide }

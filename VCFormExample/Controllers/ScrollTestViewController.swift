@@ -32,7 +32,7 @@ private extension ScrollTestViewController {
 	}
 
 	func fillForm() {
-		var elements: [DefaultFormElementType] = []
+		var elements: [DefaultFormElement] = []
 
 		elements.append(.image(#imageLiteral(resourceName: "pasternak.jpg")))
 		elements.append(.padding)

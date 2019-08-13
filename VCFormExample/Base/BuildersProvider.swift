@@ -10,8 +10,8 @@ import UIKit
 import VCForm
 
 final class BuildersProvider: IBuildersProvider {
-	func provideBuilder(for type: IFormElementType) -> IFormViewBuilder? {
-		guard let defaultType = type as? DefaultFormElementType else {
+	func provideBuilder(for type: IFormElement) -> IFormViewBuilder? {
+		guard let defaultType = type as? DefaultFormElement else {
 			return nil
 		}
 

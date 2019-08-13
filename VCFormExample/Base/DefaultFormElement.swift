@@ -1,5 +1,5 @@
 //
-//  DefaultFormElementType.swift
+//  DefaultFormElement.swift
 //  VCForm
 //
 //  Created by Valentin Cherepyanko on 03/01/2019.
@@ -9,7 +9,7 @@
 import UIKit
 import VCForm
 
-public enum DefaultFormElementType {
+public enum DefaultFormElement {
 	case title(String)
 	case normalText(String)
 	case image(UIImage)
@@ -17,8 +17,7 @@ public enum DefaultFormElementType {
 	case dynamicHeight
 }
 
-extension DefaultFormElementType: IFormElementType {
-
+extension DefaultFormElement: IFormElement {
 	public var id: String {
 		switch self {
 		case .normalText(let text): return "normalText_\(text)"

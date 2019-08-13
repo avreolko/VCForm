@@ -8,8 +8,20 @@
 
 import UIKit
 
-public protocol IFormElementType {
+//public enum VCFormSnap {
+//	case none, top, bottom
+//}
+//
+//public struct VCFormElementConfiguration {
+//	static var `default` = VCFormElementConfiguration(snap: .none)
+//
+//	let snap: VCFormSnap
+//}
+
+public protocol IFormElement {
 	var id: String { get }
+//	var config: VCFormElementConfiguration { get set }
+//	var builder: IFormViewBuilder { get }
 }
 
 /// Protocol for the views with dynamic data
@@ -21,7 +33,7 @@ public protocol IDataView: AnyObject {
 /// Abstraction of form builder, implementation could use stack view or collection view
 public protocol IFormBuilder {
 	associatedtype ContainerView: UIView
-	func append(_ element: IFormElementType) -> Self
-	func build(in stackView: ContainerView, viewHandler: (IFormElementType, UIView) -> Void) -> Self
+	func append(_ element: IFormElement) -> Self
+	func build(in stackView: ContainerView, viewHandler: (IFormElement, UIView) -> Void) -> Self
 	func reset() -> Self
 }

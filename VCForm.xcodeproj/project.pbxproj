@@ -18,7 +18,7 @@
 		A7B40BAC2300613300043DCC /* LabelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B40BA52300613200043DCC /* LabelBuilder.swift */; };
 		A7B40BAD2300613300043DCC /* TitleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B40BA62300613200043DCC /* TitleBuilder.swift */; };
 		A7B40BAE2300613300043DCC /* DynamicHeightViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B40BA72300613200043DCC /* DynamicHeightViewBuilder.swift */; };
-		A7B40BB12300615600043DCC /* DefaultFormElementType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79FB64D21DDDAA00056795D /* DefaultFormElementType.swift */; };
+		A7B40BB12300615600043DCC /* DefaultFormElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79FB64D21DDDAA00056795D /* DefaultFormElement.swift */; };
 		A7B40BB2230061AF00043DCC /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A79FB63621DC71630056795D /* ActionButton.swift */; };
 		A7B40BB4230061B400043DCC /* DynamicHeightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A767A632225A017C0046D5C6 /* DynamicHeightView.swift */; };
 		A7B40BB5230061BF00043DCC /* DynamicHeightView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A767A634225A018A0046D5C6 /* DynamicHeightView.xib */; };
@@ -75,7 +75,7 @@
 		A767A632225A017C0046D5C6 /* DynamicHeightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicHeightView.swift; sourceTree = "<group>"; };
 		A767A634225A018A0046D5C6 /* DynamicHeightView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DynamicHeightView.xib; sourceTree = "<group>"; };
 		A79FB63621DC71630056795D /* ActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
-		A79FB64D21DDDAA00056795D /* DefaultFormElementType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFormElementType.swift; sourceTree = "<group>"; };
+		A79FB64D21DDDAA00056795D /* DefaultFormElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFormElement.swift; sourceTree = "<group>"; };
 		A79FB65121DF44F70056795D /* AllBuildersTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllBuildersTestViewController.swift; sourceTree = "<group>"; };
 		A7B40B9822FEBB5500043DCC /* VCFormBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCFormBuilder.h; sourceTree = "<group>"; };
 		A7B40B9922FEBB5500043DCC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -180,7 +180,7 @@
 		A7B40BB02300614200043DCC /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				A79FB64D21DDDAA00056795D /* DefaultFormElementType.swift */,
+				A79FB64D21DDDAA00056795D /* DefaultFormElement.swift */,
 				A7B40BB82300631E00043DCC /* BuildersProvider.swift */,
 			);
 			path = Base;
@@ -408,7 +408,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A79FB65221DF44F70056795D /* AllBuildersTestViewController.swift in Sources */,
-				A7B40BB12300615600043DCC /* DefaultFormElementType.swift in Sources */,
+				A7B40BB12300615600043DCC /* DefaultFormElement.swift in Sources */,
 				A7B40BAB2300613300043DCC /* PaddingBuilder.swift in Sources */,
 				A7D0B66021D9D29500F8BD5B /* ScrollTestViewController.swift in Sources */,
 				A7B40BA92300613300043DCC /* ImageViewBuilder.swift in Sources */,

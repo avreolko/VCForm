@@ -33,7 +33,7 @@ private extension AllBuildersTestViewController {
 	}
 
 	func fillForm() {
-		var models: [DefaultFormElementType] = []
+		var models: [DefaultFormElement] = []
 
 		models.append(.dynamicHeight)
 
