@@ -76,13 +76,6 @@ public class VCForm: UIView {
 		}
 	}
 
-	public func update(_ element: IFormElement, with data: Any) {
-		// todo: добавить ассерты на случай, когда элемент с таким id есть, но не является IDataView
-		self.elements.forEach {
-			($0.1.object as? IDataView)?.update(with: data)
-		}
-	}
-
 	public func hide(_ element: IFormElement) {
 		self.hide(true, type: element)
 	}
