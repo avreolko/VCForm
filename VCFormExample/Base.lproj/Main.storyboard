@@ -83,6 +83,29 @@
                                             <segue destination="MDa-pw-230" kind="show" id="pXZ-mL-qgc"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="rSV-t1-lM2">
+                                        <rect key="frame" x="0.0" y="88" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rSV-t1-lM2" id="4qz-zC-ZBu">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Snap example" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M0x-RD-Bri">
+                                                    <rect key="frame" x="20" y="11.5" width="108" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="M0x-RD-Bri" firstAttribute="leading" secondItem="4qz-zC-ZBu" secondAttribute="leadingMargin" id="3Fa-ne-sim"/>
+                                                <constraint firstItem="M0x-RD-Bri" firstAttribute="centerY" secondItem="4qz-zC-ZBu" secondAttribute="centerY" id="ZRe-tP-vBv"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="lnJ-Hy-FgO" kind="show" id="lRc-c0-2eW"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -156,6 +179,36 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Na-Uc-Q30" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-83" y="477"/>
+        </scene>
+        <!--Snap View Controller-->
+        <scene sceneID="nd3-Df-WQr">
+            <objects>
+                <viewController id="lnJ-Hy-FgO" customClass="SnapViewController" customModule="VCFormExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="z8h-tC-Lcc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dhi-Gm-EdL" customClass="VCForm" customModule="VCForm">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="9nZ-eD-gYf" firstAttribute="trailing" secondItem="Dhi-Gm-EdL" secondAttribute="trailing" id="3Bh-Yo-Abb"/>
+                            <constraint firstItem="Dhi-Gm-EdL" firstAttribute="top" secondItem="9nZ-eD-gYf" secondAttribute="top" id="8VM-w0-xje"/>
+                            <constraint firstItem="Dhi-Gm-EdL" firstAttribute="leading" secondItem="z8h-tC-Lcc" secondAttribute="leading" id="IL2-az-qZo"/>
+                            <constraint firstItem="9nZ-eD-gYf" firstAttribute="bottom" secondItem="Dhi-Gm-EdL" secondAttribute="bottom" id="S0W-eH-ZHd"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="9nZ-eD-gYf"/>
+                    </view>
+                    <connections>
+                        <outlet property="form" destination="Dhi-Gm-EdL" id="mli-jZ-l9W"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WR4-Yh-I2G" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="676.81159420289862" y="80.357142857142847"/>
         </scene>
     </scenes>
 </document>
