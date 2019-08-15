@@ -24,7 +24,7 @@ class AllBuildersTestViewController: UIViewController {
 private extension AllBuildersTestViewController {
 
 	func configureForm() {
-		let insets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+		let insets = UIEdgeInsets(top: 50, left: 50, bottom: 50, right: 50)
 		let config = VCFormConfiguration(showScrollIndicator: false, contentInsets: insets)
 		self.form.configure(with: config)
 	}
