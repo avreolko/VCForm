@@ -2,247 +2,171 @@
 //  VCForm.swift
 //  VCForm
 //
-//  Created by Valentin Cherepyanko on 30/12/2018.
-//  Copyright © 2018 Valentin Cherepyanko. All rights reserved.
+//  Created by Valentin Cherepyanko on 03.01.2020.
+//  Copyright © 2020 Valentin Cherepyanko. All rights reserved.
 //
 
-import VCExtensions
+import UIKit
 import VCWeakContainer
+import VCExtensions
 
 public enum FormPosition {
-	case top, scroll, bottom
+    case top, scroll, bottom
 }
 
 public class VCForm: UIView {
 
-	private var config: VCFormConfiguration = .default
+    public var configuration: VCFormConfiguration = .default
 
-	private var topStackView = UIStackView(frame: .zero)
-	private var scrollView = UIScrollView(frame: .zero)
-	private var scrollStackView = UIStackView(frame: .zero)
-	private var bottomStackView = UIStackView(frame: .zero)
+    private var buildersBlocks = [() -> Void]()
 
-	private typealias FormElement = (String, IFormViewBuilder)
-	private var topBuilders: [FormElement] = []
-	private var scrollBuilders: [FormElement] = []
-	private var bottomBuilders: [FormElement] = []
+    private var stacks: [FormPosition: UIStackView] = [
+        .top: UIStackView(frame: .zero),
+        .scroll: UIStackView(frame: .zero),
+        .bottom: UIStackView(frame: .zero)
+    ]
 
-	private var placedElements: [(String, Weak<UIView>)] = []
+    private let scrollView = UIScrollView(frame: .zero)
+    private var placedViews: [(String, UIView)] = []
 
-	private var topConstraint: NSLayoutConstraint?
-	private var bottomConstraint: NSLayoutConstraint?
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.setup()
+    }
 
-	public override init(frame: CGRect) {
-		super.init(frame: frame)
-		self.setup()
-	}
+    public required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.setup()
+    }
 
-	public required init?(coder aDecoder: NSCoder) {
-		super.init(coder: aDecoder)
-		self.setup()
-	}
-}
+    @discardableResult
+    public func add<T: IViewBuilder>(_ viewBuilder: T,
+                                     to position: FormPosition = .scroll,
+                                     viewHandler: ((T.View) -> Void)? = nil) -> Self {
 
-public extension VCForm {
-	@discardableResult
-	func configure(with config: VCFormConfiguration) -> Self {
-		self.config = config
+        let builderBlock = self.makeBuilderBLock(with: viewBuilder,
+                                                 stackView: self.stacks[position],
+                                                 handler: viewHandler)
+        self.buildersBlocks.append(builderBlock)
+        return self
+    }
 
-		self.scrollView.showsVerticalScrollIndicator = config.showScrollIndicator
-		self.scrollView.isScrollEnabled = config.isScrollEnabled
+    @discardableResult
+    public func build() -> Self {
+        self.buildersBlocks.forEach { $0() }
+        return self
+    }
 
-		self.configure(self.topStackView, with: config)
-		self.configure(self.scrollStackView, with: config)
-		self.configure(self.bottomStackView, with: config)
-
-		self.configureInsets(with: config)
-
-		return self
-	}
-
-	@discardableResult
-	func add(_ builder: IFormViewBuilder,
-			 to position: FormPosition = .scroll,
-			 id: String? = nil) -> Self {
-
-		let elementID = id ?? String(describing: IFormViewBuilder.self)
-		let element = (elementID, builder)
-
-		switch position {
-		case .top: self.topBuilders.append(element)
-		case .scroll: self.scrollBuilders.append(element)
-		case .bottom: self.bottomBuilders.append(element)
-		}
-
-		return self
-	}
-
-	@discardableResult
-	func build() -> Self {
-
-		self.topBuilders.forEach { (id, builder) in
-			self.buildView(with: builder, and: id, in: self.topStackView)
-		}
-
-		self.scrollBuilders.forEach { (id, builder) in
-			self.buildView(with: builder, and: id, in: self.scrollStackView)
-		}
-
-		self.bottomBuilders.forEach { (id, builder) in
-			self.buildView(with: builder, and: id, in: self.bottomStackView)
-		}
-
-		return self
-	}
-
-	@discardableResult
-	func reset() -> Self {
-		self.placedElements.forEach { $0.1.object?.removeFromSuperview() }
-		self.placedElements = []
-		return self
-	}
+    // HAAAAACKS!
+    override public func observeValue(forKeyPath keyPath: String?,
+                                      of object: Any?,
+                                      change: [NSKeyValueChangeKey : Any]?,
+                                      context: UnsafeMutableRawPointer?) {
+        UIView.animate(withDuration: self.configuration.heightAnimationDuration,
+                       animations: { self.layoutIfNeeded() })
+    }
 }
 
 public extension VCForm {
 
-	func hide(_ elementID: String) {
-		self.hide(true, id: elementID)
-	}
+    func hide(_ elementID: String) {
+        self.hide(true, id: elementID)
+    }
 
-	func show(_ elementID: String) {
-		self.hide(false, id: elementID)
-	}
+    func show(_ elementID: String) {
+        self.hide(false, id: elementID)
+    }
 
-	func hide(_ hide: Bool, id: String) {
-		self.placedElements
-			.filter { $0.0 == id }
-			.forEach { $0.1.object?.isHidden = hide }
+    func hide(_ hide: Bool, id: String) {
+        self.placedViews
+            .filter { $0.0 == id }
+            .forEach { $0.1.isHidden = hide }
 
-		UIView.animate(withDuration: self.config.heightAnimationDuration, animations: {
-			self.layoutIfNeeded()
-		})
-	}
-}
+        UIView.animate(withDuration: self.configuration.heightAnimationDuration, animations: {
+            self.layoutIfNeeded()
+        })
+    }
 
-// MARK: setup
-private extension VCForm {
-
-	func setup() {
-		self.topStackView.backgroundColor = UIColor.red.withAlphaComponent(0.5)
-		self.scrollStackView.backgroundColor = UIColor.green.withAlphaComponent(0.5)
-		self.bottomStackView.backgroundColor = UIColor.blue.withAlphaComponent(0.5)
-
-		self.setupStackView()
-		self.placeSubviews()
-
-		self.configure(with: VCFormConfiguration.default)
-		self.setupConstraints()
-	}
-
-	func placeSubviews() {
-		self.addSubview(self.topStackView)
-
-		self.addSubview(self.scrollView)
-		self.scrollView.addSubview(self.scrollStackView)
-
-		self.addSubview(self.bottomStackView)
-	}
-
-	func setupConstraints() {
-		self.topConstraint = self.topStackView.setConstraint(top: 0, to: self)
-		self.topStackView.setConstraint(leading: 0, to: self)
-		self.topStackView.setConstraint(trailing: 0, to: self)
-		self.topStackView.setConstraint(height: 0, priority: .defaultLow)
-
-		self.scrollView.setConstraint(topPadding: 0, to: self.topStackView)
-		self.scrollView.setConstraint(leading: 0, to: self)
-		self.scrollView.setConstraint(trailing: 0, to: self)
-		self.scrollView.setConstraint(bottomPadding: 0, to: self.bottomStackView)
-
-		self.scrollStackView.setConstraint(edges: .zero, to: self.scrollView)
-		self.scrollStackView
-			.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor, multiplier: 1.0)
-			.isActive = true
-
-		self.bottomStackView.setConstraint(leading: 0, to: self)
-		self.bottomStackView.setConstraint(trailing: 0, to: self)
-		self.bottomConstraint = self.bottomStackView.setConstraint(bottom: 0, to: self)
-
-		self.bottomStackView.setConstraint(height: 0, priority: .defaultLow)
-	}
-
-	func setupStackView() {
-		self.topStackView.axis = .vertical
-		self.scrollStackView.axis = .vertical
-		self.bottomStackView.axis = .vertical
-	}
-
-	func configure(_ stackView: UIStackView, with config: VCFormConfiguration) {
-		stackView.alignment = config.alignment
-		stackView.distribution = config.distribution
-	}
-}
-
-// MARK: utility
-private extension VCForm {
-
-	func buildView(with builder: IFormViewBuilder, and id: String, in stackView: UIStackView) {
-
-		// build
-		let view = builder.build()
-		stackView.addArrangedSubview(view)
-		view.sizeToFit()
-
-		// dynamic height
-		let animationDuration = self.config.heightAnimationDuration
-		(view as? IDynamicHeight)?.heightChangedHandler = { [weak self] _ in
-			UIView.animate(withDuration: animationDuration, animations: { self?.layoutIfNeeded() })
-		}
-
-		// save for future use
-		let element = (id, Weak(view))
-		self.placedElements.append(element)
-	}
+    func reset() {
+        self.placedViews.forEach { $0.1.removeFromSuperview() }
+        self.placedViews = []
+        self.buildersBlocks = []
+    }
 }
 
 private extension VCForm {
-	func makeStackViewInsets(with config: VCFormConfiguration, and position: FormPosition) -> UIEdgeInsets {
-		var insets = config.contentInsets
+    // type erasure
+    func makeBuilderBLock<T: IViewBuilder>(with builder: T,
+                                           stackView: UIStackView?,
+                                           handler: ((T.View) -> Void)?) -> () -> Void {
+        return { [weak self] in
+            let view = builder.buildView()
+            stackView?.addArrangedSubview(view)
 
-		switch position {
-		case .top: insets.bottom = 0
-		case .scroll: insets.top = 0; insets .bottom = 0
-		case .bottom: insets.top = 0
-		}
+            view.sizeToFit()
+            view.setContentCompressionResistancePriority(.required, for: .vertical)
+            view.setContentCompressionResistancePriority(.fittingSizeLevel, for: .horizontal)
 
-		return insets
-	}
+            DispatchQueue.main.async {
+                view.addObserver(self!, forKeyPath: "center", options: NSKeyValueObservingOptions.new, context: nil)
+            }
 
-	func configureInsets(with config: VCFormConfiguration) {
-		self.topConstraint?.constant = config.contentInsets.top
-		self.bottomConstraint?.constant = -config.contentInsets.bottom
+            handler?(view)
 
-		// top and bottom set with constraints
-		var insets = config.contentInsets
-		insets.top = 0
-		insets.bottom = 0
+            self?.placedViews.append((view.id, view))
+        }
+    }
+}
 
-		self.set(insets: insets, for: self.topStackView)
-		self.set(insets: insets, for: self.scrollStackView)
-		self.set(insets: insets, for: self.bottomStackView)
-	}
+private extension VCForm {
 
-	func set(insets: UIEdgeInsets, for stackView: UIStackView) {
-		if #available(iOS 11.0, *) {
-			stackView.directionalLayoutMargins =
-				NSDirectionalEdgeInsets(top: insets.top,
-										leading: insets.left,
-										bottom: insets.bottom,
-										trailing: insets.right)
+    func setup() {
+        self.setupStackView()
+        self.placeSubviews()
+        self.setupConstraints()
+        self.configure()
+    }
 
-			stackView.isLayoutMarginsRelativeArrangement = true
-		} else {
-			stackView.layoutMargins = insets
-		}
-	}
+    func setupStackView() {
+        self.stacks[.top]?.axis = .vertical
+        self.stacks[.scroll]?.axis = .vertical
+        self.stacks[.bottom]?.axis = .vertical
+    }
+
+    func placeSubviews() {
+        self.addSubview(self.stacks[.top]!)
+
+        self.addSubview(self.scrollView)
+        self.scrollView.addSubview(self.stacks[.scroll]!)
+
+        self.addSubview(self.stacks[.bottom]!)
+    }
+
+    func setupConstraints() {
+        self.stacks[.top]?.setConstraint(top: 0, to: self)
+        self.stacks[.top]?.setConstraint(leading: 0, to: self)
+        self.stacks[.top]?.setConstraint(trailing: 0, to: self)
+        self.stacks[.top]?.setConstraint(height: 0, priority: .defaultLow)
+
+        self.scrollView.setConstraint(topPadding: 0, to: self.stacks[.top]!)
+        self.scrollView.setConstraint(leading: 0, to: self)
+        self.scrollView.setConstraint(trailing: 0, to: self)
+        self.scrollView.setConstraint(bottomPadding: 0, to: self.stacks[.bottom]!)
+
+        self.stacks[.scroll]?.setConstraint(edges: .zero, to: self.scrollView)
+        self.stacks[.scroll]?
+            .widthAnchor.constraint(equalTo: self.scrollView.widthAnchor, multiplier: 1.0)
+            .isActive = true
+
+        self.stacks[.bottom]?.setConstraint(leading: 0, to: self)
+        self.stacks[.bottom]?.setConstraint(trailing: 0, to: self)
+        self.stacks[.bottom]?.setConstraint(bottom: 0, to: self)
+
+        self.stacks[.bottom]?.setConstraint(height: 0, priority: .defaultLow)
+    }
+
+    func configure() {
+        self.scrollView.showsVerticalScrollIndicator = self.configuration.showScrollIndicator
+        self.scrollView.isScrollEnabled = self.configuration.isScrollEnabled
+    }
 }

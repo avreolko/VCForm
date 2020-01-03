@@ -9,32 +9,28 @@
 import UIKit
 import VCForm
 
-struct LabelConfiguration: IViewConfiguration {
-	let text: String
-	static let `default` = LabelConfiguration(text: "Default text")
+struct LabelBuilder {
+
+    private let viewHandler: ((UILabel) -> Void)?
+
+    init(viewHandler: ((UILabel) -> Void)? = nil) {
+        self.viewHandler = viewHandler
+    }
 }
 
-struct LabelBuilder: IFormViewBuilder, IFormViewConfigurator {
+extension LabelBuilder: IViewBuilder {
 
-	typealias ViewConfiguration = LabelConfiguration
-	typealias View = UILabel
+    typealias View = UILabel
 
-	let buildingMethod: ViewBuildingMethod = .manual
-	var viewConfiguration: ViewConfiguration = .default
-	var viewHandler: ((View) -> Void)? = nil
+    func buildView() -> View {
+        let label = UILabel(frame: .zero)
 
-	init(viewConfiguration: ViewConfiguration = .default, viewHandler: ((View) -> Void)? = nil) {
-		self.viewConfiguration = viewConfiguration
-		self.viewHandler = viewHandler
-	}
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.lineBreakMode = .byWordWrapping
+        label.numberOfLines = 0
 
-	func configure(_ view: View) {
-		view.text = self.viewConfiguration.text
-
-		view.font = UIFont.systemFont(ofSize: 14)
-		view.lineBreakMode = .byWordWrapping
-		view.numberOfLines = 0
-		view.setContentCompressionResistancePriority(.required, for: .vertical)
-		view.setContentCompressionResistancePriority(.fittingSizeLevel, for: .horizontal)
-	}
+        self.viewHandler?(label)
+        return label
+    }
 }
+

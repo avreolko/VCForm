@@ -8,36 +8,24 @@
 
 import VCExtensions
 import VCForm
+import UIKit
 
-struct ImageViewConfiguration: IViewConfiguration {
-	let image: UIImage
-	let height: CGFloat
+struct ImageViewBuilder {
 
-	static let `default` = ImageViewConfiguration(image: #imageLiteral(resourceName: "image.jpg"), height: 200)
+    private let image: UIImage
+
+    init(_ image: UIImage) {
+        self.image = image
+    }
 }
 
-struct ImageViewBuilder: IFormViewBuilder, IFormViewConfigurator {
+extension ImageViewBuilder: IViewBuilder {
 
-	typealias ViewConfiguration = ImageViewConfiguration
-	typealias View = UIImageView
+    typealias View = UIImageView
 
-	let buildingMethod: ViewBuildingMethod = .manual
-	var viewConfiguration: ViewConfiguration = .default
-	var viewHandler: ((View) -> Void)? = nil
-
-	init(viewConfiguration: ViewConfiguration = .default, viewHandler: ((View) -> Void)? = nil) {
-		self.viewConfiguration = viewConfiguration
-		self.viewHandler = viewHandler
-	}
-
-	func configure(_ view: View) {
-		let imageSize = CGSize(width: CGFloat.greatestFiniteMagnitude,
-							   height: self.viewConfiguration.height)
-
-		view.image = self.viewConfiguration.image.resize(with: imageSize)
-		view.contentMode = .scaleAspectFit
-		view.clipsToBounds = true
-		view.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
-	}
+    func buildView() -> UIImageView {
+        let imageView = UIImageView(frame: .zero)
+        imageView.image = self.image
+        return imageView
+    }
 }
-
