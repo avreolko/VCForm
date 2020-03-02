@@ -16,18 +16,20 @@ public enum FormPosition {
 
 public class VCForm: UIView {
 
-    public var configuration: VCFormConfiguration = .default
+    public var configuration = VCFormConfiguration() {
+        didSet { self.configure() }
+    }
 
     private var buildersBlocks = [() -> Void]()
 
-    private var stacks: [FormPosition: UIStackView] = [
+    var stacks: [FormPosition: UIStackView] = [
         .top: UIStackView(frame: .zero),
-        .scroll: UIStackView(frame: .zero),
+        .scroll: ReorderableStackView(frame: .zero),
         .bottom: UIStackView(frame: .zero)
     ]
 
     private let scrollView = UIScrollView(frame: .zero)
-    private var placedViews: [(String, UIView)] = []
+    var placedViews: [(String, UIView)] = []
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -44,7 +46,7 @@ public class VCForm: UIView {
                                      to position: FormPosition = .scroll,
                                      viewHandler: ((T.View) -> Void)? = nil) -> Self {
 
-        let builderBlock = self.makeBuilderBLock(with: viewBuilder,
+        let builderBlock = self.makeBuilderBlock(with: viewBuilder,
                                                  stackView: self.stacks[position],
                                                  handler: viewHandler)
         self.buildersBlocks.append(builderBlock)
@@ -96,7 +98,7 @@ public extension VCForm {
 
 private extension VCForm {
     // type erasure
-    func makeBuilderBLock<T: IViewBuilder>(with builder: T,
+    func makeBuilderBlock<T: IViewBuilder>(with builder: T,
                                            stackView: UIStackView?,
                                            handler: ((T.View) -> Void)?) -> () -> Void {
         return { [weak self] in

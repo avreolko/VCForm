@@ -36,6 +36,7 @@
 		A7D0B66E21D9D2B900F8BD5B /* VCForm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A7D0B63F21D9CC9600F8BD5B /* VCForm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A7D0B67221D9D40F00F8BD5B /* VCExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7D0B64D21D9CD2400F8BD5B /* VCExtensions.framework */; };
 		A7D0B67321D9D40F00F8BD5B /* VCExtensions.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A7D0B64D21D9CD2400F8BD5B /* VCExtensions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A7E5153A240D3D8C00D57A41 /* ReorderableStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E51538240D3BE700D57A41 /* ReorderableStackView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +103,7 @@
 		A7D0B66421D9D29600F8BD5B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A7D0B66721D9D29600F8BD5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A7D0B66921D9D29600F8BD5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A7E51538240D3BE700D57A41 /* ReorderableStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReorderableStackView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +202,7 @@
 		A7D0B65221D9CDBA00F8BD5B /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				A7E51538240D3BE700D57A41 /* ReorderableStackView.swift */,
 				A7B40B9C22FEBB5500043DCC /* IViewBuilder.swift */,
 				A75BF12A226C214300736023 /* VCFormConfiguration.swift */,
 				A7B40BDE2303F2D500043DCC /* VCForm.swift */,
@@ -364,6 +367,7 @@
 			files = (
 				A75BF12B226C214300736023 /* VCFormConfiguration.swift in Sources */,
 				A7B40BDF2303F2D500043DCC /* VCForm.swift in Sources */,
+				A7E5153A240D3D8C00D57A41 /* ReorderableStackView.swift in Sources */,
 				A7B40BA022FEBB5500043DCC /* IViewBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -15,9 +15,6 @@ public class VCFormConfiguration {
     var contentInsets: UIEdgeInsets
     var heightAnimationDuration: Double
     
-    public static var `default` =
-        VCFormConfiguration(showScrollIndicator: true, isScrollEnabled: true)
-    
     public init(showScrollIndicator: Bool = true,
                 isScrollEnabled: Bool = true,
                 contentInsets: UIEdgeInsets = .zero,
