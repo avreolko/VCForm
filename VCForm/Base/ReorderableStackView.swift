@@ -126,14 +126,10 @@ private extension ReorderableStackView {
 
             // Use the midY of the temporaryView to determine the dragging direction, location
             // maxY and minY are used in the delegate call didDragToReorder
-            let maxY = self.temporaryView.frame.maxY
             let midY = self.temporaryView.frame.midY
-            let minY = self.temporaryView.frame.minY
             let index = self.indexOfArrangedSubview(self.actualView)
 
             if midY > self.pointForReordering.y {
-                // Dragging the view down
-                self.reorderDelegate?.didDragToReorder?(inUpDirection: false, maxY: maxY, minY: minY)
 
                 if let nextView = self.getNextViewInStack(usingIndex: index) {
                     if midY > nextView.frame.midY {
@@ -149,8 +145,6 @@ private extension ReorderableStackView {
                 }
 
             } else {
-                // Dragging the view up
-                self.reorderDelegate?.didDragToReorder?(inUpDirection: true, maxY: maxY, minY: minY)
 
                 if let previousView = self.getPreviousViewInStack(usingIndex: index) {
                     if midY < previousView.frame.midY {

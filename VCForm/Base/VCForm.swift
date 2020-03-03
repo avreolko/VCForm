@@ -24,7 +24,7 @@ public class VCForm: UIView {
 
     var stacks: [FormPosition: UIStackView] = [
         .top: UIStackView(frame: .zero),
-        .scroll: ReorderableStackView(frame: .zero),
+        .scroll: ReorderableStackViewNew(frame: .zero),
         .bottom: UIStackView(frame: .zero)
     ]
 
@@ -123,13 +123,13 @@ private extension VCForm {
 private extension VCForm {
 
     func setup() {
-        self.setupStackView()
+        self.configureStacks()
         self.placeSubviews()
         self.setupConstraints()
         self.configure()
     }
 
-    func setupStackView() {
+    func configureStacks() {
         self.stacks[.top]?.axis = .vertical
         self.stacks[.scroll]?.axis = .vertical
         self.stacks[.bottom]?.axis = .vertical
@@ -170,5 +170,9 @@ private extension VCForm {
     func configure() {
         self.scrollView.showsVerticalScrollIndicator = self.configuration.showScrollIndicator
         self.scrollView.isScrollEnabled = self.configuration.isScrollEnabled
+
+        self.stacks[.top]?.spacing = self.configuration.spacing
+        self.stacks[.scroll]?.spacing = self.configuration.spacing
+        self.stacks[.bottom]?.spacing = self.configuration.spacing
     }
 }
