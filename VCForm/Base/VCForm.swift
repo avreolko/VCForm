@@ -24,9 +24,9 @@ public class VCForm: UIView {
     private var buildersBlocks = [() -> Void]()
 
     var stacks: [FormPosition: UIStackView] = [
-        .top: UIStackView(frame: .zero),
+        .top: ReorderableStackView(frame: .zero),
         .scroll: ReorderableStackView(frame: .zero),
-        .bottom: UIStackView(frame: .zero)
+        .bottom: ReorderableStackView(frame: .zero)
     ]
 
     private let scrollView = UIScrollView(frame: .zero)
@@ -172,8 +172,10 @@ private extension VCForm {
         self.scrollView.showsVerticalScrollIndicator = self.configuration.showScrollIndicator
         self.scrollView.isScrollEnabled = self.configuration.isScrollEnabled
 
-        self.stacks[.top]?.spacing = self.configuration.spacing
-        self.stacks[.scroll]?.spacing = self.configuration.spacing
-        self.stacks[.bottom]?.spacing = self.configuration.spacing
+        self.stacks.values.forEach { stack in
+            stack.spacing = self.configuration.spacing
+            guard let reorderableStackView = stack as? ReorderableStackView else { return }
+            reorderableStackView.reorderingEnabled = self.configuration.reorderable
+        }
     }
 }

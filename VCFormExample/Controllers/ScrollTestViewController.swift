@@ -16,7 +16,7 @@ class ScrollTestViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.form.configuration = VCFormConfiguration(spacing: 16)
+        self.form.configuration = VCFormConfiguration(spacing: 16, reorderable: true)
 
         self.fillForm()
     }
