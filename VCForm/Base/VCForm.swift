@@ -9,6 +9,7 @@
 import UIKit
 import VCWeakContainer
 import VCExtensions
+import VCReorderableStackView
 
 public enum FormPosition {
     case top, scroll, bottom
@@ -24,7 +25,7 @@ public class VCForm: UIView {
 
     var stacks: [FormPosition: UIStackView] = [
         .top: UIStackView(frame: .zero),
-        .scroll: ReorderableStackViewNew(frame: .zero),
+        .scroll: ReorderableStackView(frame: .zero),
         .bottom: UIStackView(frame: .zero)
     ]
 
