@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import VCWeakContainer
-import VCExtensions
 import VCReorderableStackView
+import VCExtensions
 
 public enum FormPosition {
     case top, scroll, bottom
