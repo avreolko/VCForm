@@ -168,8 +168,10 @@ private extension VCForm {
     }
 
     func configure() {
+
         self.scrollView.showsVerticalScrollIndicator = self.configuration.showScrollIndicator
         self.scrollView.isScrollEnabled = self.configuration.isScrollEnabled
+        self.scrollView.clipsToBounds = false
 
         self.stacks.values.forEach { stack in
             stack.spacing = self.configuration.spacing
