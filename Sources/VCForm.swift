@@ -136,11 +136,10 @@ private extension VCForm {
     }
 
     func placeSubviews() {
-        self.addSubview(self.stacks[.top]!)
-
         self.addSubview(self.scrollView)
         self.scrollView.addSubview(self.stacks[.scroll]!)
 
+        self.addSubview(self.stacks[.top]!)
         self.addSubview(self.stacks[.bottom]!)
     }
 
