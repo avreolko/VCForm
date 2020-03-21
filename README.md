@@ -1,6 +1,11 @@
 # VCForm
 Easy and declarative way to build your scrollable vertical form.
 
+## Demo
+Sample taken from my pet project
+
+![form_demo](https://user-images.githubusercontent.com/5366222/77226722-07a52880-6bad-11ea-9967-f9f24bc8d760.gif)
+
 ## Features
 ✅ Declarative filling
 ```swift
