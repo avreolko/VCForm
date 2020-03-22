@@ -8,19 +8,19 @@
 
 import UIKit
 
-public class VCFormConfiguration {
+struct VCFormConfiguration {
     
     var showScrollIndicator: Bool
     var isScrollEnabled: Bool
     var heightAnimationDuration: Double
     var spacing: CGFloat
-    var reorderable: Bool
+    var reorderable: [FormPosition: Bool]
     
     public init(showScrollIndicator: Bool = true,
                 isScrollEnabled: Bool = true,
                 heightAnimationDuration: Double = 0.3,
                 spacing: CGFloat = 0,
-                reorderable: Bool = false) {
+                reorderable: [FormPosition: Bool] = [:]) {
         
         self.showScrollIndicator = showScrollIndicator
         self.isScrollEnabled = isScrollEnabled

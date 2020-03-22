@@ -166,6 +166,15 @@ private extension VCForm {
 
     func configure() {
         self.scrollView.clipsToBounds = false
+
+        self.scrollView.showsVerticalScrollIndicator = self.configuration.showScrollIndicator
+        self.scrollView.isScrollEnabled = self.configuration.isScrollEnabled
+        self.stacks.values.forEach { $0.spacing = self.configuration.spacing }
+
+        self.stacks.forEach { position, stack in
+            guard let stack = stack as? ReorderableStackView else { return }
+            stack.reorderingEnabled = self.configuration.reorderable[position] ?? false
+        }
     }
 }
 
@@ -214,15 +223,16 @@ public extension VCForm {
         }
     }
 
-    var reorderable: Bool {
-        get { self.configuration.reorderable }
-
+    var reorderable: [FormPosition: Bool] {
+        get {
+            self.configuration.reorderable
+        }
         set {
             self.configuration.reorderable = newValue
 
-            self.stacks.values.forEach { stack in
-                guard let reorderableStackView = stack as? ReorderableStackView else { return }
-                reorderableStackView.reorderingEnabled = newValue
+            self.stacks.forEach { position, stack in
+                guard let stack = stack as? ReorderableStackView else { return }
+                stack.reorderingEnabled = newValue[position] ?? false
             }
         }
     }
