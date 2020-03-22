@@ -9,7 +9,7 @@
 import UIKit
 import VCExtensions
 
-public protocol IdentifiableView: AnyObject {
+public protocol IdentifiableView: UIView {
     var id: String { get }
 }
 

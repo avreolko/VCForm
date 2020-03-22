@@ -18,8 +18,6 @@ public class VCForm: UIView {
 
     fileprivate var configuration = VCFormConfiguration()
 
-    private var buildersBlocks = [() -> Void]()
-
     var stacks: [FormPosition: UIStackView] = [
         .top: ReorderableStackView(frame: .zero),
         .scroll: ReorderableStackView(frame: .zero),
@@ -27,7 +25,7 @@ public class VCForm: UIView {
     ]
 
     fileprivate let scrollView = UIScrollView(frame: .zero)
-    var placedViews: [(String, UIView)] = []
+    private var placedViews: [IdentifiableView] = []
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -47,13 +45,7 @@ public class VCForm: UIView {
         let builderBlock = self.makeBuilderBlock(with: viewBuilder,
                                                  stackView: self.stacks[position],
                                                  handler: viewHandler)
-        self.buildersBlocks.append(builderBlock)
-        return self
-    }
-
-    @discardableResult
-    public func build() -> Self {
-        self.buildersBlocks.forEach { $0() }
+        builderBlock()
         return self
     }
 
@@ -79,18 +71,18 @@ public extension VCForm {
 
     func hide(_ hide: Bool, id: String) {
         self.placedViews
-            .filter { $0.0 == id }
-            .forEach { $0.1.isHidden = hide }
+            .filter { $0.id == id }
+            .forEach { $0.isHidden = hide }
 
         UIView.animate(withDuration: self.configuration.heightAnimationDuration, animations: {
             self.layoutIfNeeded()
         })
     }
 
-    func reset() {
-        self.placedViews.forEach { $0.1.removeFromSuperview() }
+    func reset() -> Self {
+        self.placedViews.forEach { $0.removeFromSuperview() }
         self.placedViews = []
-        self.buildersBlocks = []
+        return self
     }
 }
 
@@ -113,7 +105,7 @@ private extension VCForm {
 
             handler?(view)
 
-            self?.placedViews.append((view.id, view))
+            self?.placedViews.append(view)
         }
     }
 }
