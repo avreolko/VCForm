@@ -11,17 +11,17 @@ import VCReorderableStackView
 import VCExtensions
 
 public enum FormPosition {
-    case top, scroll, bottom
+    case header, scroll, footer
 }
 
 public class VCForm: UIView {
 
     fileprivate var configuration = VCFormConfiguration()
 
-    fileprivate var stacks: [FormPosition: UIStackView] = [
-        .top: ReorderableStackView(frame: .zero),
+    fileprivate var stacks: [FormPosition: ReorderableStackView] = [
+        .header: ReorderableStackView(frame: .zero),
         .scroll: ReorderableStackView(frame: .zero),
-        .bottom: ReorderableStackView(frame: .zero)
+        .footer: ReorderableStackView(frame: .zero)
     ]
 
     fileprivate let scrollView = UIScrollView(frame: .zero)
@@ -105,58 +105,50 @@ public extension VCForm {
 private extension VCForm {
 
     func setup() {
-        self.configureStacks()
         self.placeSubviews()
         self.setupConstraints()
         self.configure()
-    }
-
-    func configureStacks() {
-        self.stacks[.top]?.axis = .vertical
-        self.stacks[.scroll]?.axis = .vertical
-        self.stacks[.bottom]?.axis = .vertical
     }
 
     func placeSubviews() {
         self.addSubview(self.scrollView)
         self.scrollView.addSubview(self.stacks[.scroll]!)
 
-        self.addSubview(self.stacks[.top]!)
-        self.addSubview(self.stacks[.bottom]!)
+        self.addSubview(self.stacks[.header]!)
+        self.addSubview(self.stacks[.footer]!)
     }
 
     func setupConstraints() {
-        self.stacks[.top]?.setConstraint(top: 0, to: self)
-        self.stacks[.top]?.setConstraint(leading: 0, to: self)
-        self.stacks[.top]?.setConstraint(trailing: 0, to: self)
-        self.stacks[.top]?.setConstraint(height: 0, priority: .defaultLow)
+        self.stacks[.header]?.setConstraint(top: 0, to: self)
+        self.stacks[.header]?.setConstraint(leading: 0, to: self)
+        self.stacks[.header]?.setConstraint(trailing: 0, to: self)
+        self.stacks[.header]?.setConstraint(height: 0, priority: .defaultLow)
 
-        self.scrollView.setConstraint(topPadding: 0, to: self.stacks[.top]!)
+        self.scrollView.setConstraint(topPadding: 0, to: self.stacks[.header]!)
         self.scrollView.setConstraint(leading: 0, to: self)
         self.scrollView.setConstraint(trailing: 0, to: self)
-        self.scrollView.setConstraint(bottomPadding: 0, to: self.stacks[.bottom]!)
+        self.scrollView.setConstraint(bottomPadding: 0, to: self.stacks[.footer]!)
 
         self.stacks[.scroll]?.setConstraint(edges: .zero, to: self.scrollView)
         self.stacks[.scroll]?
             .widthAnchor.constraint(equalTo: self.scrollView.widthAnchor, multiplier: 1.0)
             .isActive = true
 
-        self.stacks[.bottom]?.setConstraint(leading: 0, to: self)
-        self.stacks[.bottom]?.setConstraint(trailing: 0, to: self)
-        self.stacks[.bottom]?.setConstraint(bottom: 0, to: self)
+        self.stacks[.footer]?.setConstraint(leading: 0, to: self)
+        self.stacks[.footer]?.setConstraint(trailing: 0, to: self)
+        self.stacks[.footer]?.setConstraint(bottom: 0, to: self)
 
-        self.stacks[.bottom]?.setConstraint(height: 0, priority: .defaultLow)
+        self.stacks[.footer]?.setConstraint(height: 0, priority: .defaultLow)
     }
 
     func configure() {
         self.scrollView.clipsToBounds = false
-
         self.scrollView.showsVerticalScrollIndicator = self.configuration.showScrollIndicator
         self.scrollView.isScrollEnabled = self.configuration.isScrollEnabled
-        self.stacks.values.forEach { $0.spacing = self.configuration.spacing }
 
         self.stacks.forEach { position, stack in
-            guard let stack = stack as? ReorderableStackView else { return }
+            stack.axis = .vertical
+            stack.spacing = self.configuration.spacing
             stack.reorderingEnabled = self.configuration.reorderable[position] ?? false
         }
     }
@@ -217,9 +209,42 @@ public extension VCForm {
             self.configuration.reorderable = newValue
 
             self.stacks.forEach { position, stack in
-                guard let stack = stack as? ReorderableStackView else { return }
                 stack.reorderingEnabled = newValue[position] ?? false
             }
+        }
+    }
+}
+
+// MARK: - reorder delegates
+
+public extension VCForm {
+    var headerReoderDelegate: IReorderableStackViewDelegate? {
+        get {
+            self.stacks[.header]?.delegate
+        }
+
+        set {
+            self.stacks[.header]?.delegate = newValue
+        }
+    }
+
+    var scrollReoderDelegate: IReorderableStackViewDelegate? {
+        get {
+            self.stacks[.scroll]?.delegate
+        }
+
+        set {
+            self.stacks[.scroll]?.delegate = newValue
+        }
+    }
+
+    var footerReoderDelegate: IReorderableStackViewDelegate? {
+        get {
+            self.stacks[.footer]?.delegate
+        }
+
+        set {
+            self.stacks[.footer]?.delegate = newValue
         }
     }
 }
