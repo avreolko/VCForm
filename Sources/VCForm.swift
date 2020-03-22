@@ -59,6 +59,8 @@ public class VCForm: UIView {
     }
 }
 
+// MARK: - actions
+
 public extension VCForm {
 
     func hide(_ elementID: String) {
@@ -86,6 +88,8 @@ public extension VCForm {
     }
 }
 
+// MARK: - building
+
 private extension VCForm {
     // type erasure
     func makeBuilderBlock<T: IViewBuilder>(with builder: T,
@@ -109,6 +113,8 @@ private extension VCForm {
         }
     }
 }
+
+// MARK: - subviews configuration
 
 private extension VCForm {
 
@@ -169,6 +175,8 @@ private extension VCForm {
         }
     }
 }
+
+// MARK: - form configuration
 
 public extension VCForm {
 
