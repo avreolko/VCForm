@@ -12,21 +12,18 @@ public class VCFormConfiguration {
     
     var showScrollIndicator: Bool
     var isScrollEnabled: Bool
-    var contentInsets: UIEdgeInsets
     var heightAnimationDuration: Double
     var spacing: CGFloat
     var reorderable: Bool
     
     public init(showScrollIndicator: Bool = true,
                 isScrollEnabled: Bool = true,
-                contentInsets: UIEdgeInsets = .zero,
                 heightAnimationDuration: Double = 0.3,
                 spacing: CGFloat = 0,
                 reorderable: Bool = false) {
         
         self.showScrollIndicator = showScrollIndicator
         self.isScrollEnabled = isScrollEnabled
-        self.contentInsets = contentInsets
         self.heightAnimationDuration = heightAnimationDuration
         self.spacing = spacing
         self.reorderable = reorderable

@@ -16,9 +16,7 @@ public enum FormPosition {
 
 public class VCForm: UIView {
 
-    public var configuration = VCFormConfiguration() {
-        didSet { self.configure() }
-    }
+    fileprivate var configuration = VCFormConfiguration()
 
     private var buildersBlocks = [() -> Void]()
 
@@ -28,7 +26,7 @@ public class VCForm: UIView {
         .bottom: ReorderableStackView(frame: .zero)
     ]
 
-    private let scrollView = UIScrollView(frame: .zero)
+    fileprivate let scrollView = UIScrollView(frame: .zero)
     var placedViews: [(String, UIView)] = []
 
     public override init(frame: CGRect) {
@@ -167,15 +165,65 @@ private extension VCForm {
     }
 
     func configure() {
-
-        self.scrollView.showsVerticalScrollIndicator = self.configuration.showScrollIndicator
-        self.scrollView.isScrollEnabled = self.configuration.isScrollEnabled
         self.scrollView.clipsToBounds = false
+    }
+}
 
-        self.stacks.values.forEach { stack in
-            stack.spacing = self.configuration.spacing
-            guard let reorderableStackView = stack as? ReorderableStackView else { return }
-            reorderableStackView.reorderingEnabled = self.configuration.reorderable
+public extension VCForm {
+
+    var showScrollIndicator: Bool {
+        get {
+            self.configuration.showScrollIndicator
+        }
+
+        set {
+            self.configuration.showScrollIndicator = newValue
+            self.scrollView.showsVerticalScrollIndicator = newValue
+        }
+    }
+
+    var isScrollEnabled: Bool {
+        get {
+            self.configuration.isScrollEnabled
+        }
+
+        set {
+            self.configuration.isScrollEnabled = newValue
+            self.scrollView.isScrollEnabled = newValue
+        }
+    }
+
+    var heightAnimationDuration: Double {
+        get {
+            self.configuration.heightAnimationDuration
+        }
+
+        set {
+            self.configuration.heightAnimationDuration = newValue
+        }
+    }
+
+    var spacing: CGFloat {
+        get {
+            self.configuration.spacing
+        }
+
+        set {
+            self.configuration.spacing = newValue
+            self.stacks.values.forEach { $0.spacing = newValue }
+        }
+    }
+
+    var reorderable: Bool {
+        get { self.configuration.reorderable }
+
+        set {
+            self.configuration.reorderable = newValue
+
+            self.stacks.values.forEach { stack in
+                guard let reorderableStackView = stack as? ReorderableStackView else { return }
+                reorderableStackView.reorderingEnabled = newValue
+            }
         }
     }
 }
