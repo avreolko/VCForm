@@ -18,13 +18,14 @@ public class VCForm: UIView {
 
     fileprivate var configuration = VCFormConfiguration()
 
-    var stacks: [FormPosition: UIStackView] = [
+    fileprivate var stacks: [FormPosition: UIStackView] = [
         .top: ReorderableStackView(frame: .zero),
         .scroll: ReorderableStackView(frame: .zero),
         .bottom: ReorderableStackView(frame: .zero)
     ]
 
     fileprivate let scrollView = UIScrollView(frame: .zero)
+
     private var placedViews: [IdentifiableView] = []
 
     public override init(frame: CGRect) {
@@ -42,10 +43,21 @@ public class VCForm: UIView {
                                      to position: FormPosition = .scroll,
                                      viewHandler: ((T.View) -> Void)? = nil) -> Self {
 
-        let builderBlock = self.makeBuilderBlock(with: viewBuilder,
-                                                 stackView: self.stacks[position],
-                                                 handler: viewHandler)
-        builderBlock()
+        let view = viewBuilder.buildView()
+        self.stacks[position]?.addArrangedSubview(view)
+
+        view.sizeToFit()
+        view.setContentCompressionResistancePriority(.required, for: .vertical)
+        view.setContentCompressionResistancePriority(.fittingSizeLevel, for: .horizontal)
+
+        DispatchQueue.main.async {
+            view.addObserver(self, forKeyPath: "center", options: NSKeyValueObservingOptions.new, context: nil)
+        }
+
+        viewHandler?(view)
+
+        self.placedViews.append(view)
+
         return self
     }
 
@@ -85,32 +97,6 @@ public extension VCForm {
         self.placedViews.forEach { $0.removeFromSuperview() }
         self.placedViews = []
         return self
-    }
-}
-
-// MARK: - building
-
-private extension VCForm {
-    // type erasure
-    func makeBuilderBlock<T: IViewBuilder>(with builder: T,
-                                           stackView: UIStackView?,
-                                           handler: ((T.View) -> Void)?) -> () -> Void {
-        return { [weak self] in
-            let view = builder.buildView()
-            stackView?.addArrangedSubview(view)
-
-            view.sizeToFit()
-            view.setContentCompressionResistancePriority(.required, for: .vertical)
-            view.setContentCompressionResistancePriority(.fittingSizeLevel, for: .horizontal)
-
-            DispatchQueue.main.async {
-                view.addObserver(self!, forKeyPath: "center", options: NSKeyValueObservingOptions.new, context: nil)
-            }
-
-            handler?(view)
-
-            self?.placedViews.append(view)
-        }
     }
 }
 
