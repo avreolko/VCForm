@@ -162,6 +162,10 @@ public extension VCForm {
             .arrangedSubviews
             .compactMap { $0 as? T } ?? []
     }
+
+    func scroll(to view: UIView) {
+        self.scrollView.setContentOffset(view.frame.origin, animated: true)
+    }
 }
 
 // MARK: - form configuration
