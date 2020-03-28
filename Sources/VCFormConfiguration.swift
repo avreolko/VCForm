@@ -14,13 +14,13 @@ struct VCFormConfiguration {
     var isScrollEnabled: Bool
     var heightAnimationDuration: Double
     var spacing: CGFloat
-    var reorderable: [FormPosition: Bool]
+    var reorderable: [FormSection: Bool]
     
     public init(showScrollIndicator: Bool = true,
                 isScrollEnabled: Bool = true,
                 heightAnimationDuration: Double = 0.3,
                 spacing: CGFloat = 0,
-                reorderable: [FormPosition: Bool] = [:]) {
+                reorderable: [FormSection: Bool] = [:]) {
         
         self.showScrollIndicator = showScrollIndicator
         self.isScrollEnabled = isScrollEnabled

@@ -10,7 +10,7 @@ import UIKit
 import VCReorderableStackView
 import VCExtensions
 
-public enum FormPosition {
+public enum FormSection {
     case header, scroll, footer
 }
 
@@ -18,7 +18,7 @@ public class VCForm: UIView {
 
     fileprivate var configuration = VCFormConfiguration()
 
-    fileprivate var stacks: [FormPosition: ReorderableStackView] = [
+    fileprivate var stacks: [FormSection: ReorderableStackView] = [
         .header: ReorderableStackView(frame: .zero),
         .scroll: ReorderableStackView(frame: .zero),
         .footer: ReorderableStackView(frame: .zero)
@@ -40,11 +40,11 @@ public class VCForm: UIView {
 
     @discardableResult
     public func add<T: IViewBuilder>(_ viewBuilder: T,
-                                     to position: FormPosition = .scroll,
+                                     to section: FormSection = .scroll,
                                      viewHandler: ((T.View) -> Void)? = nil) -> Self {
 
         let view = viewBuilder.buildView()
-        self.stacks[position]?.addArrangedSubview(view)
+        self.stacks[section]?.addArrangedSubview(view)
 
         view.sizeToFit()
         view.setContentCompressionResistancePriority(.required, for: .vertical)
@@ -146,10 +146,10 @@ private extension VCForm {
         self.scrollView.showsVerticalScrollIndicator = self.configuration.showScrollIndicator
         self.scrollView.isScrollEnabled = self.configuration.isScrollEnabled
 
-        self.stacks.forEach { position, stack in
+        self.stacks.forEach { section, stack in
             stack.axis = .vertical
             stack.spacing = self.configuration.spacing
-            stack.reorderingEnabled = self.configuration.reorderable[position] ?? false
+            stack.reorderingEnabled = self.configuration.reorderable[section] ?? false
         }
     }
 }
@@ -201,15 +201,15 @@ public extension VCForm {
         }
     }
 
-    var reorderable: [FormPosition: Bool] {
+    var reorderable: [FormSection: Bool] {
         get {
             self.configuration.reorderable
         }
         set {
             self.configuration.reorderable = newValue
 
-            self.stacks.forEach { position, stack in
-                stack.reorderingEnabled = newValue[position] ?? false
+            self.stacks.forEach { section, stack in
+                stack.reorderingEnabled = newValue[section] ?? false
             }
         }
     }
