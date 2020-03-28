@@ -154,6 +154,16 @@ private extension VCForm {
     }
 }
 
+// MARK: - access
+
+public extension VCForm {
+    func arrangedSubviews<T: UIView>(from section: FormSection) -> [T] {
+        self.stacks[section]?
+            .arrangedSubviews
+            .compactMap { $0 as? T } ?? []
+    }
+}
+
 // MARK: - form configuration
 
 public extension VCForm {
