@@ -24,7 +24,7 @@ public class VCForm: UIView {
         .footer: ReorderableStackView(frame: .zero)
     ]
 
-    fileprivate let scrollView = UIScrollView(frame: .zero)
+    public let scrollView = UIScrollView(frame: .zero)
 
     private var placedViews: [IdentifiableView] = []
 
