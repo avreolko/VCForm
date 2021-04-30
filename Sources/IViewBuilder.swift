@@ -42,7 +42,7 @@ public protocol IViewBuilder {
     func buildView() -> View
 }
 
-public struct Builder<View: UIView>: IViewBuilder {
+public struct ProgrammaticBuilder<View: UIView>: IViewBuilder {
 
     private let viewHandler: ((View) -> Void)?
 
