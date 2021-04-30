@@ -1,4 +1,6 @@
 # VCForm
+[![Tests](https://github.com/avreolko/VCForm/workflows/Tests/badge.svg?branch=master)](https://github.com/avreolko/VCForm/actions/workflows/tests.yml)
+
 An easy declarative way to build your scrollable vertical forms
 
 ## Features
@@ -30,3 +32,5 @@ You can start building forms straight away with the included builders: `Builder<
 The first builder initializes the view with `.init(frame: .zero)`, the second one loads the view from the .xib file.
 You also can create your own builders with the `IViewBuilder` protocol.
 
+## License
+This project is released under the [MIT license](https://en.wikipedia.org/wiki/MIT_License).
