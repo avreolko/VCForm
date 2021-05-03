@@ -12,13 +12,17 @@ let package = Package(
         .library(name: "VCForm", targets: ["VCForm"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/avreolko/VCReorderableStackView.git", .branch("master")),
-        .package(url: "git@github.com:avreolko/VCExtensions.git", .branch("master")),
+        .package(
+            url: "https://github.com/avreolko/VCReorderableStackView.git",
+            .branch("master")
+        )
     ],
     targets: [
-        .target(name: "VCForm",
-                dependencies: ["VCReorderableStackView", "VCExtensions"],
-                path: "Sources"),
+        .target(
+            name: "VCForm",
+            dependencies: ["VCReorderableStackView"],
+            path: "Sources"
+        ),
         .testTarget(
             name: "VCFormTests",
             dependencies: ["VCForm"],

@@ -25,7 +25,6 @@
 //
 
 import UIKit
-import VCExtensions
 
 public protocol IdentifiableView: UIView {
     var id: String { get }
@@ -72,6 +71,21 @@ public struct XibBuilder<View: UIView>: IViewBuilder {
         }
 
         self.viewHandler?(view)
+        return view
+    }
+}
+
+private extension UIView {
+
+    static func loadFromXib<T: UIView>() -> T? {
+
+        let bundle = Bundle(for: T.self)
+
+        guard let view = bundle.loadNibNamed(String(describing: T.self), owner: nil, options: nil)?.first as? T else {
+            assertionFailure("Failed to load view from xib")
+            return nil
+        }
+
         return view
     }
 }

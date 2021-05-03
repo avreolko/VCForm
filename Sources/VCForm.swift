@@ -26,7 +26,6 @@
 
 import UIKit
 import VCReorderableStackView
-import VCExtensions
 
 public enum FormSection {
     case header, scroll, footer
@@ -137,26 +136,36 @@ private extension VCForm {
     }
 
     func setupConstraints() {
-        self.stacks[.header]?.setConstraint(top: 0, to: self)
-        self.stacks[.header]?.setConstraint(leading: 0, to: self)
-        self.stacks[.header]?.setConstraint(trailing: 0, to: self)
-        self.stacks[.header]?.setConstraint(height: 0, priority: .defaultLow)
 
-        self.scrollView.setConstraint(topPadding: 0, to: self.stacks[.header]!)
-        self.scrollView.setConstraint(leading: 0, to: self)
-        self.scrollView.setConstraint(trailing: 0, to: self)
-        self.scrollView.setConstraint(bottomPadding: 0, to: self.stacks[.footer]!)
+        self.stacks[.header]?.topAnchor.pin(to: self.topAnchor)
+        self.stacks[.header]?.leadingAnchor.pin(to: self.leadingAnchor)
+        self.stacks[.header]?.trailingAnchor.pin(to: self.trailingAnchor)
 
-        self.stacks[.scroll]?.setConstraint(edges: .zero, to: self.scrollView)
+        let headerHeightConstraint = self.stacks[.header]?.heightAnchor.constraint(equalToConstant: 0)
+        headerHeightConstraint?.priority = .defaultLow
+        headerHeightConstraint?.isActive = true
+
+        self.scrollView.topAnchor.pin(to: self.stacks[.header]!.bottomAnchor)
+        self.scrollView.leadingAnchor.pin(to: self.leadingAnchor)
+        self.scrollView.trailingAnchor.pin(to: self.trailingAnchor)
+        self.scrollView.bottomAnchor.pin(to: self.stacks[.footer]!.topAnchor)
+
+        self.stacks[.scroll]?.leadingAnchor.pin(to: self.scrollView.leadingAnchor)
+        self.stacks[.scroll]?.topAnchor.pin(to: self.scrollView.topAnchor)
+        self.stacks[.scroll]?.trailingAnchor.pin(to: self.scrollView.trailingAnchor)
+        self.stacks[.scroll]?.bottomAnchor.pin(to: self.scrollView.bottomAnchor)
+
         self.stacks[.scroll]?
             .widthAnchor.constraint(equalTo: self.scrollView.widthAnchor, multiplier: 1.0)
             .isActive = true
 
-        self.stacks[.footer]?.setConstraint(leading: 0, to: self)
-        self.stacks[.footer]?.setConstraint(trailing: 0, to: self)
-        self.stacks[.footer]?.setConstraint(bottom: 0, to: self)
+        self.stacks[.footer]?.leadingAnchor.pin(to: self.leadingAnchor)
+        self.stacks[.footer]?.trailingAnchor.pin(to: self.trailingAnchor)
+        self.stacks[.footer]?.bottomAnchor.pin(to: self.bottomAnchor)
 
-        self.stacks[.footer]?.setConstraint(height: 0, priority: .defaultLow)
+        let footerHeightConstraint = self.stacks[.footer]?.heightAnchor.constraint(equalToConstant: 0)
+        footerHeightConstraint?.priority = .defaultLow
+        footerHeightConstraint?.isActive = true
     }
 
     func configure() {
@@ -278,5 +287,21 @@ public extension VCForm {
         set {
             self.stacks[.footer]?.delegate = newValue
         }
+    }
+}
+
+private extension NSLayoutAnchor {
+
+    @objc
+    @discardableResult
+    func pin(to anchor: NSLayoutAnchor<AnchorType>,
+             offset: CGFloat = 0,
+             priority: UILayoutPriority = .required) -> NSLayoutConstraint {
+
+        let constraint = self.constraint(equalTo: anchor, constant: offset)
+        (constraint.firstItem as? UIView)?.translatesAutoresizingMaskIntoConstraints = false
+        constraint.priority = priority
+        NSLayoutConstraint.activate([constraint])
+        return constraint
     }
 }
