@@ -1,6 +1,4 @@
 # VCForm
-[![Tests](https://github.com/avreolko/VCForm/workflows/Tests/badge.svg?branch=master)](https://github.com/avreolko/VCForm/actions/workflows/tests.yml)
-
 An easy declarative way to build your scrollable vertical forms
 
 ## Features
