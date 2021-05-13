@@ -1,5 +1,5 @@
 //
-//  VCForm.swift
+//  FormView.swift
 //  VCForm
 //
 //  Created by Valentin Cherepyanko on 03.01.2020.
@@ -31,9 +31,9 @@ public enum FormSection {
     case header, scroll, footer
 }
 
-public class VCForm: UIView {
+public class FormView: UIView {
 
-    fileprivate var configuration = VCFormConfiguration()
+    fileprivate var configuration = FormViewConfiguration()
 
     fileprivate var stacks: [FormSection: ReorderableStackView] = [
         .header: ReorderableStackView(frame: .zero),
@@ -62,35 +62,26 @@ public class VCForm: UIView {
 
         let view = viewBuilder.buildView()
         self.stacks[section]?.addArrangedSubview(view)
-
-        view.sizeToFit()
-        view.setContentCompressionResistancePriority(.required, for: .vertical)
-        view.setContentCompressionResistancePriority(.fittingSizeLevel, for: .horizontal)
-
-        DispatchQueue.main.async {
-            view.addObserver(self, forKeyPath: "center", options: NSKeyValueObservingOptions.new, context: nil)
-        }
-
         viewHandler?(view)
-
         self.placedViews.append(view)
 
         return self
     }
 
-    // HAAAAACKS!
-    override public func observeValue(forKeyPath keyPath: String?,
-                                      of object: Any?,
-                                      change: [NSKeyValueChangeKey : Any]?,
-                                      context: UnsafeMutableRawPointer?) {
-        UIView.animate(withDuration: self.configuration.heightAnimationDuration,
-                       animations: { self.layoutIfNeeded() })
+    @discardableResult
+    public func addArrangedSubview(
+        _ view: UIView,
+        to section: FormSection = .scroll
+    ) -> Self {
+        self.stacks[section]?.addArrangedSubview(view)
+        self.placedViews.append(view)
+        return self
     }
 }
 
 // MARK: - actions
 
-public extension VCForm {
+public extension FormView {
 
     func hide(_ elementID: String) {
         self.hide(true, id: elementID)
@@ -119,7 +110,7 @@ public extension VCForm {
 
 // MARK: - subviews configuration
 
-private extension VCForm {
+private extension FormView {
 
     func setup() {
         self.placeSubviews()
@@ -174,16 +165,19 @@ private extension VCForm {
         self.scrollView.isScrollEnabled = self.configuration.isScrollEnabled
 
         self.stacks.forEach { section, stack in
-            stack.axis = .vertical
-            stack.spacing = self.configuration.spacing
             stack.reorderingEnabled = self.configuration.reorderable[section] ?? false
+            stack.spacing = self.configuration.spacing
+            stack.isLayoutMarginsRelativeArrangement = true
+            stack.axis = .vertical
+            stack.alignment = .fill
+            stack.distribution = .equalSpacing
         }
     }
 }
 
 // MARK: - access
 
-public extension VCForm {
+public extension FormView {
     func arrangedSubviews<T: UIView>(from section: FormSection) -> [T] {
         self.stacks[section]?
             .arrangedSubviews
@@ -197,7 +191,7 @@ public extension VCForm {
 
 // MARK: - form configuration
 
-public extension VCForm {
+public extension FormView {
 
     var showScrollIndicator: Bool {
         get {
@@ -258,7 +252,7 @@ public extension VCForm {
 
 // MARK: - reorder delegates
 
-public extension VCForm {
+public extension FormView {
     var headerReoderDelegate: IReorderableStackViewDelegate? {
         get {
             self.stacks[.header]?.delegate
