@@ -1,5 +1,5 @@
 //
-//  VCFormConfiguration.swift
+//  FormViewConfiguration.swift
 //  VCForm
 //
 //  Created by Valentin Cherepyanko on 03.01.2020.
@@ -26,7 +26,7 @@
 
 import UIKit
 
-struct VCFormConfiguration {
+struct FormViewConfiguration {
     
     var showScrollIndicator: Bool
     var isScrollEnabled: Bool
