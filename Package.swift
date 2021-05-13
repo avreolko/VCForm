@@ -14,7 +14,7 @@ let package = Package(
     dependencies: [
         .package(
             url: "https://github.com/avreolko/VCReorderableStackView.git",
-            .branch("master")
+            from: "0.1.2"
         )
     ],
     targets: [
